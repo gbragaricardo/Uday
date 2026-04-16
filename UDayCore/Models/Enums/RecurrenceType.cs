@@ -4,10 +4,11 @@ using System.Text;
 
 namespace UDayCore.Models.Enums
 {
-    public enum PriorityLevel
+    public enum RecurrenceType
     {
-        Low,
-        Medium,
-        High
+        None,
+        Daily,
+        Weekly,,
+        Monthly
     }
 }

@@ -16,20 +16,26 @@
     </Shell.TitleView>
 
     <TabBar>
-        <Tab Title="Routine">
+        <Tab Title="Home">
             <ShellContent
-                Title="Routine"
-                ContentTemplate="{DataTemplate views:RoutinePage}"
-                Route="RoutinePage" />
+                Title="Home"
+                ContentTemplate="{DataTemplate views:HomePage}"
+                Route="HomePage" />
 
         </Tab>
 
-        <Tab Title="Decks">
+        <Tab Title="Tasks">
             <ShellContent
-                Title="Decks"
-                ContentTemplate="{DataTemplate views:DecksPage}"
-                Route="DecksPage" />
+                Title="Tasks"
+                ContentTemplate="{DataTemplate views:TasksPage}"
+                Route="TasksPage" />
+        </Tab>
 
+        <Tab Title="DailyLog">
+            <ShellContent
+                Title="DailyLog"
+                ContentTemplate="{DataTemplate views:DailyLogPage}"
+                Route="DailyLogPage" />
         </Tab>
     </TabBar>
 

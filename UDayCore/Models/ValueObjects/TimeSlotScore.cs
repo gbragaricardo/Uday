@@ -4,7 +4,9 @@ using System.Text;
 
 namespace UDayCore.Models.ValueObjects
 {
-    class TimeSlotScore
+    public class TimeSlotScore
     {
+        public string TimeSlotId { get; set; } = string.Empty;
+        public int Score { get; set; } 
     }
 }

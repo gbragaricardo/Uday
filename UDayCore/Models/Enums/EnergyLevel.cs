@@ -4,7 +4,10 @@ using System.Text;
 
 namespace UDayCore.Models.Enums
 {
-    class Class1
+    public enum EnergyLevel
     {
+        Low,
+        Medium,
+        High
     }
 }
