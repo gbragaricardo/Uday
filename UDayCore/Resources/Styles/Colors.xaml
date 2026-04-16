@@ -5,12 +5,16 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
+    <Color x:Key="Primary">#9C8EBD</Color>
+    <Color x:Key="PrimaryDark">#8072A3</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
-    <Color x:Key="SecondaryDarkText">#9880e5</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="TextColor">#8C8C8C</Color>
+    <Color x:Key="Secondary">#A3D4C0</Color>
+    <Color x:Key="SecondaryDarkText">#242424</Color>
+    <Color x:Key="Tertiary">#F2A68D</Color>
+    <Color x:Key="LightTextColor">#B0B0B0</Color>
+    <Color x:Key="AppBackgroundColor">#FAFAFA</Color>
+    <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
@@ -29,9 +33,13 @@
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
-    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="{StaticResource CardBackgroundColor}"/>
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="TextColorBrush" Color="{StaticResource TextColor}"/>
+    <SolidColorBrush x:Key="LightTextColorBrush" Color="{StaticResource LightTextColor}"/>
+    <SolidColorBrush x:Key="AppBackgroundBrush" Color="{StaticResource AppBackgroundColor}"/>
 
     <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
     <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
