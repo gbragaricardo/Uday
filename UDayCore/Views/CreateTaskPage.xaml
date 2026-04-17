@@ -1,12 +1,125 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:UDayCore.ViewModels"
              x:Class="UDayCore.Views.CreateTaskPage"
-             Title="CreateTaskPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="CreateT askPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:CreateTaskViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ScrollView Padding="16">
+        <VerticalStackLayout Spacing="8">
+
+            <Label Text="Título *"
+                   TextColor="{StaticResource TextColor}"
+                   FontAttributes="Bold"/>
+            <Border StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="{StaticResource CardBackgroundColor}"
+                    Padding="4">
+
+                <Entry Placeholder="Ex: Estudar Cálculo..." 
+                       MaxLength="60"
+                       PlaceholderColor="{StaticResource LightTextColor}"
+                       TextColor="{StaticResource PrimaryDarkText}"
+                       BackgroundColor="Transparent"/>
+            </Border>
+
+
+            <Label Text="Descrição"
+                   TextColor="{StaticResource TextColor}"
+                   FontSize="14"
+                   FontAttributes="Bold"/>
+            <Border StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="{StaticResource CardBackgroundColor}"
+                    Padding="4">
+
+                <Editor Placeholder="Ex: Descrição" 
+                        MaxLength="450"
+                        PlaceholderColor="{StaticResource LightTextColor}"
+                        TextColor="{StaticResource PrimaryDarkText}"
+                        BackgroundColor="{StaticResource CardBackgroundColor}"
+                        AutoSize="TextChanges"/>
+
+            </Border>
+
+            <VerticalStackLayout Spacing="5" Margin="0,0,0,15">
+                <Label Text="Duração (em minutos) *" TextColor="{StaticResource TextColor}" FontAttributes="Bold" Margin="5,0,0,0"/>
+
+                <Border StrokeThickness="1"
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="{StaticResource CardBackgroundColor}"
+                        Padding="4">
+                    
+                    <Grid ColumnDefinitions="*, Auto" BackgroundColor="{StaticResource CardBackgroundColor}" Padding="15,10">
+                        <Label Grid.Column="0" Text="{Binding Duration, StringFormat='{0} minutos'}" VerticalOptions="Center" TextColor="{StaticResource PrimaryDarkText}" FontSize="16"/>
+
+                        <Stepper Grid.Column="1" 
+                             Minimum="0" 
+                             Maximum="480" 
+                             Increment="15" 
+                             Value="{Binding Duration, Mode=TwoWay}"/>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+
+            <Label Text="Data inicio"
+                   TextColor="{StaticResource TextColor}"
+                   FontSize="14"
+                   FontAttributes="Bold"/>
+
+            <Border StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="{StaticResource CardBackgroundColor}"
+                    Padding="4">
+
+            <DatePicker TextColor="{StaticResource PrimaryDarkText}"
+                        BackgroundColor="{StaticResource CardBackgroundColor}"/>
+            </Border>
+
+            <Label Text="DeadLine"
+                   TextColor="{StaticResource TextColor}"
+                   FontSize="14"
+                   FontAttributes="Bold"/>
+
+            <DatePicker TextColor="{StaticResource PrimaryDarkText}"
+                        BackgroundColor="{StaticResource CardBackgroundColor}"/>
+
+            <Label Text="Nivel de esforço"
+                   TextColor="{StaticResource TextColor}"
+                   FontSize="14"
+                   FontAttributes="Bold"/>
+
+            <Picker TextColor="{StaticResource PrimaryDarkText}"
+                    BackgroundColor="{StaticResource CardBackgroundColor}"
+                    ItemsSource="{Binding Priorities}"
+                    SelectedItem="{Binding SelectedPriority}"/>
+
+            <Label Text="Prioridade"
+                   TextColor="{StaticResource TextColor}"
+                   FontSize="14"
+                   FontAttributes="Bold"/>
+
+            <Picker TextColor="{StaticResource PrimaryDarkText}"
+                    BackgroundColor="{StaticResource CardBackgroundColor}"
+                    ItemsSource="{Binding Priorities}"
+                    SelectedItem="{Binding SelectedPriority}"/>
+
+            <Switch/>
+
+            <Label Text="Periodo de recorrencia"
+                   TextColor="{StaticResource TextColor}"
+                   FontSize="14"
+                   FontAttributes="Bold"/>
+
+            <Picker TextColor="{StaticResource PrimaryDarkText}"
+                    BackgroundColor="{StaticResource CardBackgroundColor}"
+                    ItemsSource="{Binding Priorities}"
+                    SelectedItem="{Binding SelectedPriority}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

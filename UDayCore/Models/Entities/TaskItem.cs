@@ -15,7 +15,7 @@ namespace UDayCore.Models.Entities
         public DateTime? DueDate { get; set; }
         public EnergyLevel EnergyLevel { get; set; }
         public PriorityLevel Priority { get; set; }
-        public RecurrenceType RecurrenceType { get; set; } = RecurrenceType.None
+        public RecurrenceType RecurrenceType { get; set; } = RecurrenceType.None;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public bool IsCompleted { get; set; } = false;
     }

@@ -8,7 +8,7 @@ namespace UDayCore.Models.Enums
     {
         None,
         Daily,
-        Weekly,,
+        Weekly,
         Monthly
     }
 }

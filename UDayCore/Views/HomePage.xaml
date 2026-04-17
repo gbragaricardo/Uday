@@ -4,9 +4,7 @@
              x:Class="UDayCore.Views.HomePage"
              Title="HomePage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Button Text="+"
+                Clicked="OnTestarTelaClicked"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -3,4 +3,9 @@
     <color name="colorPrimary">#512BD4</color>
     <color name="colorPrimaryDark">#2B0B98</color>
     <color name="colorAccent">#2B0B98</color>
+
+	<style name="Maui.MainTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+		<item name="colorControlNormal">@android:color/transparent</item>
+		<item name="colorControlActivated">@android:color/transparent</item>
+	</style>
 </resources>

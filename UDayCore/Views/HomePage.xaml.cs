@@ -6,4 +6,10 @@ public partial class HomePage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    // Método que o botão do XAML vai chamar
+    private async void OnTestarTelaClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CreateTaskPage());
+    }
 }
