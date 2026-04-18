@@ -13,7 +13,7 @@ namespace UDayCore.Models.Entities
         public int EstimatedDurationMinutes { get; set; }
         public DateTime? AvailableFrom { get; set; }
         public DateTime? DueDate { get; set; }
-        public EnergyLevel EnergyLevel { get; set; }
+        public EffortLevel EffortLevel { get; set; }
         public PriorityLevel Priority { get; set; }
         public RecurrenceType RecurrenceType { get; set; } = RecurrenceType.None;
         public DateTime CreatedAt { get; set; } = DateTime.Now;

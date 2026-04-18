@@ -3,6 +3,52 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <Style x:Key="ModernChipStyle" TargetType="RadioButton">
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="ControlTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border x:Name="RootBorder"
+                            Stroke="{StaticResource LightTextColor}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="{StaticResource CardBackgroundColor}"
+                            Padding="15,10"
+                            HorizontalOptions="Fill">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CheckedStates">
+                                    <VisualState x:Name="Checked">
+                                        <VisualState.Setters>
+                                            <Setter TargetName="RootBorder" Property="Border.BackgroundColor" Value="{StaticResource Primary}" />
+                                            <Setter TargetName="RootBorder" Property="Border.Stroke" Value="{StaticResource Primary}" />
+                                            <Setter TargetName="ContentLabel" Property="Label.TextColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Unchecked">
+                                        <VisualState.Setters>
+                                            <Setter TargetName="RootBorder" Property="Border.BackgroundColor" Value="{StaticResource CardBackgroundColor}" />
+                                            <Setter TargetName="ContentLabel" Property="Label.TextColor" Value="{StaticResource PrimaryDarkText}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Label x:Name="ContentLabel"
+                               Text="{TemplateBinding Content}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               FontAttributes="Bold"
+                               FontSize="14" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>

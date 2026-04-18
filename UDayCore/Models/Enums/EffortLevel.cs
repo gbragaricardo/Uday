@@ -4,10 +4,10 @@ using System.Text;
 
 namespace UDayCore.Models.Enums
 {
-    public enum EnergyLevel
+    public enum EffortLevel
     {
-        Low,
+        Light,
         Medium,
-        High
+        Heavy
     }
 }

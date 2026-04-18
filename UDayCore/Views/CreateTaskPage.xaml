@@ -2,19 +2,22 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:UDayCore.ViewModels"
+             xmlns:enums="clr-namespace:UDayCore.Models.Enums"
+             xmlns:controls="clr-namespace:UDayCore.Controls"
              x:Class="UDayCore.Views.CreateTaskPage"
              Title="CreateT askPage">
 
     <ContentPage.BindingContext>
         <viewmodels:CreateTaskViewModel/>
     </ContentPage.BindingContext>
-    
+
     <ScrollView Padding="16">
         <VerticalStackLayout Spacing="8">
 
             <Label Text="Título *"
                    TextColor="{StaticResource TextColor}"
                    FontAttributes="Bold"/>
+            
             <Border StrokeThickness="1"
                     StrokeShape="RoundRectangle 10"
                     BackgroundColor="{StaticResource CardBackgroundColor}"
@@ -32,6 +35,7 @@
                    TextColor="{StaticResource TextColor}"
                    FontSize="14"
                    FontAttributes="Bold"/>
+            
             <Border StrokeThickness="1"
                     StrokeShape="RoundRectangle 10"
                     BackgroundColor="{StaticResource CardBackgroundColor}"
@@ -46,24 +50,24 @@
 
             </Border>
 
-            <VerticalStackLayout Spacing="5" Margin="0,0,0,15">
-                <Label Text="Duração (em minutos) *" TextColor="{StaticResource TextColor}" FontAttributes="Bold" Margin="5,0,0,0"/>
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Duração (em minutos)"
+                       TextColor="{StaticResource TextColor}"
+                       FontAttributes="Bold"/>
 
-                <Border StrokeThickness="1"
-                        StrokeShape="RoundRectangle 10"
-                        BackgroundColor="{StaticResource CardBackgroundColor}"
-                        Padding="4">
-                    
-                    <Grid ColumnDefinitions="*, Auto" BackgroundColor="{StaticResource CardBackgroundColor}" Padding="15,10">
-                        <Label Grid.Column="0" Text="{Binding Duration, StringFormat='{0} minutos'}" VerticalOptions="Center" TextColor="{StaticResource PrimaryDarkText}" FontSize="16"/>
+                <HorizontalStackLayout BackgroundColor="{StaticResource CardBackgroundColor}"
+                                       Spacing="8">
 
-                        <Stepper Grid.Column="1" 
-                             Minimum="0" 
-                             Maximum="480" 
-                             Increment="15" 
-                             Value="{Binding Duration, Mode=TwoWay}"/>
-                    </Grid>
-                </Border>
+                    <Label Text="{Binding Duration, StringFormat='{0} minutos'}"
+                           VerticalOptions="Center" TextColor="{StaticResource PrimaryDarkText}"
+                           FontSize="16"/>
+
+                    <controls:UdayStepper Grid.Column="1" 
+                                          Minimum="0" 
+                                          Maximum="480" 
+                                          Increment="15" 
+                                          Value="{Binding Duration}" />
+                </HorizontalStackLayout>
             </VerticalStackLayout>
 
             <Label Text="Data inicio"
@@ -76,8 +80,8 @@
                     BackgroundColor="{StaticResource CardBackgroundColor}"
                     Padding="4">
 
-            <DatePicker TextColor="{StaticResource PrimaryDarkText}"
-                        BackgroundColor="{StaticResource CardBackgroundColor}"/>
+                <DatePicker TextColor="{StaticResource PrimaryDarkText}"
+                            BackgroundColor="{StaticResource CardBackgroundColor}"/>
             </Border>
 
             <Label Text="DeadLine"
@@ -85,28 +89,67 @@
                    FontSize="14"
                    FontAttributes="Bold"/>
 
-            <DatePicker TextColor="{StaticResource PrimaryDarkText}"
-                        BackgroundColor="{StaticResource CardBackgroundColor}"/>
-
-            <Label Text="Nivel de esforço"
-                   TextColor="{StaticResource TextColor}"
-                   FontSize="14"
-                   FontAttributes="Bold"/>
-
-            <Picker TextColor="{StaticResource PrimaryDarkText}"
+            <Border StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
                     BackgroundColor="{StaticResource CardBackgroundColor}"
-                    ItemsSource="{Binding Priorities}"
-                    SelectedItem="{Binding SelectedPriority}"/>
+                    Padding="4">
 
-            <Label Text="Prioridade"
-                   TextColor="{StaticResource TextColor}"
-                   FontSize="14"
-                   FontAttributes="Bold"/>
+                <DatePicker TextColor="{StaticResource PrimaryDarkText}"
+                            BackgroundColor="{StaticResource CardBackgroundColor}"/>
+            </Border>
 
-            <Picker TextColor="{StaticResource PrimaryDarkText}"
-                    BackgroundColor="{StaticResource CardBackgroundColor}"
-                    ItemsSource="{Binding Priorities}"
-                    SelectedItem="{Binding SelectedPriority}"/>
+            <VerticalStackLayout Spacing="5" Margin="0,0,0,8"
+                                 RadioButtonGroup.GroupName="EffortGroup"
+                                 RadioButtonGroup.SelectedValue="{Binding SelectedEffortLevel, Mode=TwoWay}">
+
+                <Label Text="Nível de Esforço" 
+                       TextColor="{StaticResource TextColor}" 
+                       FontAttributes="Bold"/>
+
+                <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10" Margin="0,5">
+                    <RadioButton Grid.Column="0" 
+                                 Content="Leve" 
+                                 Value="{x:Static enums:EffortLevel.Light}"
+                                 Style="{StaticResource ModernChipStyle}" />
+
+                    <RadioButton Grid.Column="1" 
+                                 Content="Médio" 
+                                 Value="{x:Static enums:EffortLevel.Medium}"
+                                 Style="{StaticResource ModernChipStyle}" />
+
+                    <RadioButton Grid.Column="2" 
+                                 Content="Pesado" 
+                                 Value="{x:Static enums:EffortLevel.Heavy}"
+                                 Style="{StaticResource ModernChipStyle}" />
+                </Grid>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="8"
+                     RadioButtonGroup.GroupName="PriorityGroup"
+                     RadioButtonGroup.SelectedValue="{Binding SelectedPriority, Mode=TwoWay}">
+
+                <Label Text="Prioridade" 
+                       TextColor="{StaticResource TextColor}" 
+                       FontAttributes="Bold"/>
+
+                <Grid ColumnDefinitions="*, *, *"
+                      ColumnSpacing="8">
+
+                    <RadioButton Content="Baixa" 
+                                 Value="{x:Static enums:PriorityLevel.Low}"
+                                 Style="{StaticResource ModernChipStyle}"/>
+
+                    <RadioButton Grid.Column="1" 
+                                 Content="Média" 
+                                 Value="{x:Static enums:PriorityLevel.Medium}"
+                                 Style="{StaticResource ModernChipStyle}"/>
+
+                    <RadioButton Grid.Column="2" 
+                                 Content="Alta" 
+                                 Value="{x:Static enums:PriorityLevel.High}"
+                                 Style="{StaticResource ModernChipStyle}"/>
+                </Grid>
+            </VerticalStackLayout>
 
             <Switch/>
 
