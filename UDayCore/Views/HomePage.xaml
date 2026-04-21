@@ -3,11 +3,129 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UDayCore.Views.HomePage"
              Title="HomePage">
-    <Grid RowDefinitions="Auto, *, Auto">
+    <Grid RowDefinitions="Auto, *, Auto"
+          Padding="16">
         
-        
-        <Button Text="+"
-                Grid.Row="2"
-                Clicked="OnTestarTelaClicked"/>
+        <Grid ColumnDefinitions="*, Auto"
+              Margin="0, 0, 0, 16">
+            
+            <Label Grid.Column="0" 
+                   Text="UDay" 
+                   TextColor="{StaticResource Primary}" 
+                   FontAttributes="Bold" 
+                   FontSize="28" 
+                   VerticalOptions="Center" />
+
+            <HorizontalStackLayout Grid.Column="1"
+                                   Spacing="16">
+                
+                <Border StrokeThickness="0"
+                        HeightRequest="24"
+                        WidthRequest="24"
+                        StrokeShape="Ellipse">
+                    
+                    <Image Source="user.png"
+                           Aspect="AspectFill"/>
+                </Border>
+                
+                <Border StrokeThickness="0"
+                        HeightRequest="24"
+                        WidthRequest="24"
+                        StrokeShape="Ellipse">
+
+                    <ImageButton Source="bell.png"
+                                 Aspect="AspectFill"
+                                 Padding="0"
+                                 BackgroundColor="Transparent" />
+                </Border>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <VerticalStackLayout Grid.Row="1"
+                             Spacing="16">
+
+            <VerticalStackLayout>
+                
+            <Label Text="Olá, Nome"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource TextColor}"/>
+            
+            <Label Text="Sua atividade hoje"
+                   FontSize="16"/>
+            </VerticalStackLayout>
+
+            <Border StrokeThickness="1"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="{StaticResource CardBackgroundColor}"
+                    Padding="16">
+                <Border.Shadow>
+                    <Shadow Brush="Black" 
+                            Offset="0, 5" 
+                            Radius="10" 
+                            Opacity="0.1" />
+                </Border.Shadow>
+
+                <Grid RowDefinitions="Auto, Auto, Auto"
+                      RowSpacing="8">
+                    <FlexLayout Grid.Row="0"
+                                JustifyContent="SpaceBetween">
+                        <Label Text="Progresso diário"
+                               VerticalOptions="Center"
+                               FontSize="24"
+                               FontAttributes="Bold"/>
+                        
+                        <Border StrokeShape="RoundRectangle 4"
+                                Padding="8">
+                            <Label Text="57%"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                    </FlexLayout>
+
+                    <Label Grid.Row="1"
+                           Text="4 de 7 tarefas concluídas"/>
+
+                    <Grid ColumnDefinitions="57*, 43*"
+                          Grid.Row="2"
+                          HeightRequest="16">
+
+                        
+                        <Border Grid.ColumnSpan="2" 
+                        BackgroundColor="{StaticResource Secondary}" 
+                        StrokeThickness="0" 
+                        StrokeShape="RoundRectangle 6" />
+
+                        <Border Grid.Column="0" 
+                        BackgroundColor="{StaticResource Primary}" 
+                        StrokeThickness="0" 
+                        StrokeShape="RoundRectangle 6" />
+                    </Grid>
+
+                </Grid>
+            </Border>
+            
+            <CollectionView>
+            
+            </CollectionView>
+        </VerticalStackLayout>
+
+        <Border Grid.Row="2"
+                StrokeShape="Ellipse"
+                HeightRequest="64"
+                WidthRequest="64"
+                HorizontalOptions="End"
+                BackgroundColor="{StaticResource Primary}">
+            <Label Text="+"
+                   FontSize="32"
+                   TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   BackgroundColor="Transparent"/>
+
+            <Border.GestureRecognizers>
+
+                <TapGestureRecognizer Tapped="OnTestarTelaClicked"/>
+            </Border.GestureRecognizers>
+        </Border>
     </Grid>
 </ContentPage>
