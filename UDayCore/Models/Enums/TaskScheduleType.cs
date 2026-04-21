@@ -4,12 +4,12 @@ using System.Text;
 
 namespace UDayCore.Models.Enums
 {
-    public enum RecurrenceType
+    public enum TaskScheduleType
     {
         None,
-        Daily,
-        Weekly,
-        Monthly,
-        Yearly
+        SpecificDate,
+        TimeBox,
+        TimeFrame,
+        Recurring
     }
 }

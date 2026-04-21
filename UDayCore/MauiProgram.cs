@@ -42,6 +42,14 @@ namespace UDayCore
                 handler.PlatformView.Background = null;
 #endif
             });
+            Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+            {
+#if ANDROID
+                // Ao definir como null, removemos o Drawable do sublinhado completamente.
+                // Isso é isolado apenas para o campo de texto e não afeta o DatePickerDialog.
+                handler.PlatformView.Background = null;
+#endif
+            });
 
             return builder.Build();
         }

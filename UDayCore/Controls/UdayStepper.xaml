@@ -10,7 +10,7 @@
             BackgroundColor="{StaticResource CardBackgroundColor}" 
             HorizontalOptions="Start">
 
-        <Grid ColumnDefinitions="Auto, Auto">
+        <Grid ColumnDefinitions="64, 64">
 
             <Button Grid.Column="0" 
                     Text="-" 

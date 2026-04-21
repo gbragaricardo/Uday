@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UDayCore.Views.HomePage"
              Title="HomePage">
-    <VerticalStackLayout>
+    <Grid RowDefinitions="Auto, *, Auto">
+        
+        
         <Button Text="+"
+                Grid.Row="2"
                 Clicked="OnTestarTelaClicked"/>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
