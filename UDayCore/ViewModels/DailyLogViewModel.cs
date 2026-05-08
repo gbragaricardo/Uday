@@ -59,8 +59,6 @@ namespace UDayCore.ViewModels
                 });
             }
 
-            // Simula o sucesso na tela
-            App.Current.MainPage.DisplayAlert("Pronto!", "Seu log diário foi salvo com sucesso.", "OK");
         }
     }
 }

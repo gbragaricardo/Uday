@@ -1,130 +1,198 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UDayCore.Views.HomePage"
-             Title="HomePage">
-    <Grid RowDefinitions="Auto, *, Auto"
-          Padding="16">
-        
-        <Grid ColumnDefinitions="*, Auto"
-              Margin="0, 0, 0, 16">
-            
-            <Label Grid.Column="0" 
-                   Text="UDay" 
-                   TextColor="{StaticResource Primary}" 
-                   FontAttributes="Bold" 
-                   FontSize="28" 
-                   VerticalOptions="Center" />
+<ContentPage
+    x:Class="UDayCore.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
+    Title="HomePage"
+    NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False"
+    mc:Ignorable="d">
 
-            <HorizontalStackLayout Grid.Column="1"
-                                   Spacing="16">
-                
-                <Border StrokeThickness="0"
-                        HeightRequest="24"
-                        WidthRequest="24"
-                        StrokeShape="Ellipse">
-                    
-                    <Image Source="user.png"
-                           Aspect="AspectFill"/>
+    <ContentPage.BindingContext>
+        <viewModels:HomeViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid
+        Padding="16"
+        RowDefinitions="Auto, *, Auto"
+        VerticalOptions="Fill">
+
+        <Grid Margin="0,0,0,16" ColumnDefinitions="*, Auto">
+
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontSize="28"
+                Text="UDay"
+                TextColor="{StaticResource Primary}"
+                VerticalOptions="Center" />
+
+            <HorizontalStackLayout Grid.Column="1" Spacing="16">
+
+                <Border
+                    HeightRequest="24"
+                    StrokeShape="Ellipse"
+                    StrokeThickness="0"
+                    WidthRequest="24">
+
+                    <Image Aspect="AspectFill" Source="user.png" />
                 </Border>
-                
-                <Border StrokeThickness="0"
-                        HeightRequest="24"
-                        WidthRequest="24"
-                        StrokeShape="Ellipse">
 
-                    <ImageButton Source="bell.png"
-                                 Aspect="AspectFill"
-                                 Padding="0"
-                                 BackgroundColor="Transparent" />
+                <Border
+                    HeightRequest="24"
+                    StrokeShape="Ellipse"
+                    StrokeThickness="0"
+                    WidthRequest="24">
+
+                    <ImageButton
+                        Padding="0"
+                        Aspect="AspectFill"
+                        BackgroundColor="Transparent"
+                        Source="bell.png" />
                 </Border>
             </HorizontalStackLayout>
         </Grid>
 
-        <VerticalStackLayout Grid.Row="1"
-                             Spacing="16">
+        <Grid
+            Grid.Row="1"
+            RowDefinitions="Auto, Auto, *"
+            RowSpacing="16">
 
-            <VerticalStackLayout>
-                
-            <Label Text="Olá, Nome"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   TextColor="{StaticResource TextColor}"/>
-            
-            <Label Text="Sua atividade hoje"
-                   FontSize="16"/>
+            <VerticalStackLayout Grid.Row="0">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="28"
+                    Text="Olá, Nome"
+                    TextColor="{StaticResource TextColor}" />
+
+                <Label FontSize="16" Text="Sua atividade hoje" />
             </VerticalStackLayout>
 
-            <Border StrokeThickness="1"
-                    StrokeShape="RoundRectangle 8"
-                    BackgroundColor="{StaticResource CardBackgroundColor}"
-                    Padding="16">
+            <Border
+                Grid.Row="1"
+                Padding="16"
+                BackgroundColor="{StaticResource CardBackgroundColor}"
+                StrokeShape="RoundRectangle 8"
+                StrokeThickness="1">
                 <Border.Shadow>
-                    <Shadow Brush="Black" 
-                            Offset="0, 5" 
-                            Radius="10" 
-                            Opacity="0.1" />
+                    <Shadow
+                        Brush="Black"
+                        Opacity="0.1"
+                        Radius="10"
+                        Offset="0, 5" />
                 </Border.Shadow>
 
-                <Grid RowDefinitions="Auto, Auto, Auto"
-                      RowSpacing="8">
-                    <FlexLayout Grid.Row="0"
-                                JustifyContent="SpaceBetween">
-                        <Label Text="Progresso diário"
-                               VerticalOptions="Center"
-                               FontSize="24"
-                               FontAttributes="Bold"/>
-                        
-                        <Border StrokeShape="RoundRectangle 4"
-                                Padding="8">
-                            <Label Text="57%"
-                                   VerticalOptions="Center"/>
+                <Grid RowDefinitions="Auto, Auto, Auto" RowSpacing="8">
+                    <FlexLayout Grid.Row="0" JustifyContent="SpaceBetween">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="24"
+                            Text="Progresso diário"
+                            VerticalOptions="Center" />
+
+                        <Border Padding="8" StrokeShape="RoundRectangle 4">
+                            <Label Text="57%" VerticalOptions="Center" />
                         </Border>
                     </FlexLayout>
 
-                    <Label Grid.Row="1"
-                           Text="4 de 7 tarefas concluídas"/>
+                    <Label Grid.Row="1" Text="4 de 7 tarefas concluídas" />
 
-                    <Grid ColumnDefinitions="57*, 43*"
-                          Grid.Row="2"
-                          HeightRequest="16">
+                    <Grid
+                        Grid.Row="2"
+                        ColumnDefinitions="57*, 43*"
+                        HeightRequest="16">
 
-                        
-                        <Border Grid.ColumnSpan="2" 
-                        BackgroundColor="{StaticResource Secondary}" 
-                        StrokeThickness="0" 
-                        StrokeShape="RoundRectangle 6" />
 
-                        <Border Grid.Column="0" 
-                        BackgroundColor="{StaticResource Primary}" 
-                        StrokeThickness="0" 
-                        StrokeShape="RoundRectangle 6" />
+                        <Border
+                            Grid.ColumnSpan="2"
+                            BackgroundColor="{StaticResource Secondary}"
+                            StrokeShape="RoundRectangle 6"
+                            StrokeThickness="0" />
+
+                        <Border
+                            Grid.Column="0"
+                            BackgroundColor="{StaticResource Primary}"
+                            StrokeShape="RoundRectangle 6"
+                            StrokeThickness="0" />
                     </Grid>
 
                 </Grid>
             </Border>
-            
-            <CollectionView>
-            
-            </CollectionView>
-        </VerticalStackLayout>
 
-        <Border Grid.Row="2"
-                StrokeShape="Ellipse"
-                HeightRequest="64"
-                WidthRequest="64"
-                HorizontalOptions="End"
-                BackgroundColor="{StaticResource Primary}">
-            <Label Text="+"
-                   FontSize="32"
-                   TextColor="White"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"
-                   BackgroundColor="Transparent"/>
+            <CollectionView Grid.Row="2" ItemsSource="{Binding MockTasks}">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="16" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Padding="0,16"
+                            MinimumHeightRequest="80"
+                            StrokeShape="RoundRectangle 8">
+                            
+                            <Grid ColumnDefinitions="64, *">
+                                <CheckBox Grid.Column="0"
+                                          Scale="1.5"/>
+
+                                <Grid
+                                    Grid.Column="1"
+                                    RowDefinitions="*, Auto"
+                                    RowSpacing="16">
+
+                                    <Label
+                                        Grid.Row="0"
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        Text="{Binding Title}" />
+
+                                    <HorizontalStackLayout Grid.Row="1" Spacing="16">
+                                        <Border
+                                            Padding="8"
+                                            Background="LightGrey"
+                                            StrokeShape="RoundRectangle 4"
+                                            StrokeThickness="1">
+                                            <Label Text="{Binding DueDate}" />
+                                        </Border>
+
+                                        <Border
+                                            Padding="8"
+                                            Background="LightYellow"
+                                            StrokeShape="RoundRectangle 4"
+                                            StrokeThickness="1">
+                                            <Label Text="{Binding Priority}" />
+                                        </Border>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <Border
+            Grid.Row="2"
+            BackgroundColor="{StaticResource Primary}"
+            HeightRequest="64"
+            HorizontalOptions="End"
+            StrokeShape="Ellipse"
+            WidthRequest="64">
+            <Label
+                BackgroundColor="Transparent"
+                FontSize="32"
+                HorizontalTextAlignment="Center"
+                Text="+"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
 
             <Border.GestureRecognizers>
 
-                <TapGestureRecognizer Tapped="OnTestarTelaClicked"/>
+                <TapGestureRecognizer Tapped="OnTestarTelaClicked" />
             </Border.GestureRecognizers>
         </Border>
     </Grid>
