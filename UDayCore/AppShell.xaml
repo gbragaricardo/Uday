@@ -8,11 +8,12 @@
     Title="UDayCore">
 
     <Shell.TitleView>
-        <Label Text="MEUS DECKS" 
-               TextColor="White" 
-               FontAttributes="Bold" 
-               HorizontalOptions="Center" 
-               VerticalOptions="Center" />
+        <Label
+            FontAttributes="Bold"
+            HorizontalOptions="Center"
+            Text="MEUS DECKS"
+            TextColor="White"
+            VerticalOptions="Center" />
     </Shell.TitleView>
 
     <TabBar>

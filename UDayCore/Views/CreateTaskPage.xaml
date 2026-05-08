@@ -1,274 +1,311 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
-             xmlns:enums="clr-namespace:UDayCore.Models.Enums"
-             xmlns:controls="clr-namespace:UDayCore.Controls"
-             x:Class="UDayCore.Views.CreateTaskPage"
-             Title="CreateT askPage">
+<ContentPage
+    x:Class="UDayCore.Views.CreateTaskPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:UDayCore.Controls"
+    xmlns:enums="clr-namespace:UDayCore.Models.Enums"
+    xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
+    Title="CreateT askPage">
 
     <ContentPage.BindingContext>
-        <viewModels:CreateTaskViewModel/>
+        <viewModels:CreateTaskViewModel />
     </ContentPage.BindingContext>
 
     <ScrollView Padding="16">
         <Grid RowDefinitions="*, Auto">
-            <VerticalStackLayout Grid.Row="0"
-                                 Spacing="16">
+            <VerticalStackLayout Grid.Row="0" Spacing="16">
 
                 <VerticalStackLayout Spacing="4">
 
-                    <Label Text="Título"
-                           TextColor="{StaticResource TextColor}" 
-                           FontAttributes="Bold"/>
-                    
-                    <Border StrokeThickness="1"
-                        StrokeShape="RoundRectangle 10"
+                    <Label
+                        FontAttributes="Bold"
+                        Text="Título"
+                        TextColor="{StaticResource TextColor}" />
+
+                    <Border
+                        Padding="4"
                         BackgroundColor="{StaticResource CardBackgroundColor}"
-                        Padding="4">
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1">
 
-                        <Entry Placeholder="Título" 
-                               MaxLength="60"
-                               PlaceholderColor="{StaticResource LightTextColor}"
-                               TextColor="{StaticResource PrimaryDarkText}"
-                               BackgroundColor="Transparent"/>
+                        <Entry
+                            BackgroundColor="Transparent"
+                            MaxLength="60"
+                            Placeholder="Título"
+                            PlaceholderColor="{StaticResource LightTextColor}"
+                            TextColor="{StaticResource PrimaryDarkText}" />
                     </Border>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="4">
 
-                    <Label Text="Descrição"
-                           TextColor="{StaticResource TextColor}" 
-                           FontAttributes="Bold"/>
+                    <Label
+                        FontAttributes="Bold"
+                        Text="Descrição"
+                        TextColor="{StaticResource TextColor}" />
 
-                    <Border StrokeThickness="1"
-                            StrokeShape="RoundRectangle 10"
+                    <Border
+                        Padding="4"
+                        BackgroundColor="{StaticResource CardBackgroundColor}"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1">
+
+                        <Editor
+                            AutoSize="TextChanges"
                             BackgroundColor="{StaticResource CardBackgroundColor}"
-                            Padding="4">
-                        
-                        <Editor Placeholder="Descrição (opcional)" 
-                                MaxLength="450"
-                                PlaceholderColor="{StaticResource LightTextColor}"
-                                TextColor="{StaticResource PrimaryDarkText}"
-                                BackgroundColor="{StaticResource CardBackgroundColor}"
-                                AutoSize="TextChanges"/>
+                            MaxLength="450"
+                            Placeholder="Descrição (opcional)"
+                            PlaceholderColor="{StaticResource LightTextColor}"
+                            TextColor="{StaticResource PrimaryDarkText}" />
                     </Border>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout BackgroundColor="{StaticResource CardBackgroundColor}"
-                                     Spacing="4">
+                <VerticalStackLayout BackgroundColor="{StaticResource CardBackgroundColor}" Spacing="4">
 
-                    <Label Text="Duração estimada:"
-                           TextColor="{StaticResource TextColor}" 
-                           FontAttributes="Bold"/>
+                    <Label
+                        FontAttributes="Bold"
+                        Text="Duração estimada:"
+                        TextColor="{StaticResource TextColor}" />
 
                     <HorizontalStackLayout Spacing="16">
 
-                        <Border Stroke="{StaticResource LightTextColor}"
-                                StrokeThickness="1"
-                                StrokeShape="RoundRectangle 10" 
-                                BackgroundColor="{StaticResource CardBackgroundColor}"
-                                Padding="24,0"
-                                MinimumWidthRequest="156">
+                        <Border
+                            Padding="24,0"
+                            BackgroundColor="{StaticResource CardBackgroundColor}"
+                            MinimumWidthRequest="156"
+                            Stroke="{StaticResource LightTextColor}"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1">
 
-                            <Label Text="{Binding Duration, StringFormat='{0} minutos'}"
-                                   VerticalOptions="Center" 
-                                   HorizontalOptions="Center"
-                                   TextColor="{StaticResource PrimaryDarkText}"
-                                   FontSize="14"/>
+                            <Label
+                                FontSize="14"
+                                HorizontalOptions="Center"
+                                Text="{Binding Duration, StringFormat='{0} minutos'}"
+                                TextColor="{StaticResource PrimaryDarkText}"
+                                VerticalOptions="Center" />
                         </Border>
-                        
-                        <controls:UdayStepper Grid.Column="1" 
-                                              Minimum="15" 
-                                              Maximum="240" 
-                                              Increment="15" 
-                                              Value="{Binding Duration}" />
+
+                        <controls:UdayStepper
+                            Grid.Column="1"
+                            Increment="15"
+                            Maximum="240"
+                            Minimum="15"
+                            Value="{Binding Duration}" />
 
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="4">
 
-                    <Label Text="Tipo de prazo" 
-                           TextColor="{StaticResource TextColor}" 
-                           FontAttributes="Bold"/>
+                    <Label
+                        FontAttributes="Bold"
+                        Text="Tipo de prazo"
+                        TextColor="{StaticResource TextColor}" />
 
-                    <Border StrokeThickness="1"
-                            StrokeShape="RoundRectangle 10"
-                            BackgroundColor="{StaticResource CardBackgroundColor}"
-                            Padding="4 ,0">
+                    <Border
+                        Padding="4,0"
+                        BackgroundColor="{StaticResource CardBackgroundColor}"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1">
 
-                        <Picker ItemsSource="{Binding ScheduleOptions}"
-                                SelectedItem="{Binding SelectedScheduleType}"
-                                Title="Quando?" />
+                        <Picker
+                            Title="Quando?"
+                            ItemsSource="{Binding ScheduleOptions}"
+                            SelectedItem="{Binding SelectedScheduleType}" />
                     </Border>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout Spacing="5"
-                                     RadioButtonGroup.GroupName="RecurrenceTypeGroup"
-                                     RadioButtonGroup.SelectedValue="{Binding SelectedRecurrenceType, Mode=TwoWay}"
-                                     IsVisible="{Binding IsRecurrenceVisisble, Mode=TwoWay}">
+                <VerticalStackLayout
+                    IsVisible="{Binding IsRecurrenceVisisble, Mode=TwoWay}"
+                    RadioButtonGroup.GroupName="RecurrenceTypeGroup"
+                    RadioButtonGroup.SelectedValue="{Binding SelectedRecurrenceType, Mode=TwoWay}"
+                    Spacing="5">
 
-                    <Label Text="Periodo de recorrencia" 
-                           TextColor="{StaticResource TextColor}" 
-                           FontAttributes="Bold"/>
+                    <Label
+                        FontAttributes="Bold"
+                        Text="Periodo de recorrencia"
+                        TextColor="{StaticResource TextColor}" />
 
-                    <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="10" Margin="0,5">
-                        <RadioButton Grid.Column="0" 
-                                     Content="Diário" 
-                                     Value="{x:Static enums:RecurrenceType.Daily}"
-                                     Style="{StaticResource ModernChipStyle}" />
+                    <Grid
+                        Margin="0,5"
+                        ColumnDefinitions="*, *, *, *"
+                        ColumnSpacing="10">
+                        <RadioButton
+                            Grid.Column="0"
+                            Content="Diário"
+                            Style="{StaticResource ModernChipStyle}"
+                            Value="{x:Static enums:RecurrenceType.Daily}" />
 
-                        <RadioButton Grid.Column="1" 
-                                     Content="Semanal" 
-                                     Value="{x:Static enums:RecurrenceType.Weekly}"
-                                     Style="{StaticResource ModernChipStyle}" />
+                        <RadioButton
+                            Grid.Column="1"
+                            Content="Semanal"
+                            Style="{StaticResource ModernChipStyle}"
+                            Value="{x:Static enums:RecurrenceType.Weekly}" />
 
-                        <RadioButton Grid.Column="2" 
-                                     Content="Mensal" 
-                                     Value="{x:Static enums:RecurrenceType.Monthly}"
-                                     Style="{StaticResource ModernChipStyle}" />
+                        <RadioButton
+                            Grid.Column="2"
+                            Content="Mensal"
+                            Style="{StaticResource ModernChipStyle}"
+                            Value="{x:Static enums:RecurrenceType.Monthly}" />
 
-                        <RadioButton Grid.Column="3" 
-                                     Content="Anual" 
-                                     Value="{x:Static enums:RecurrenceType.Yearly}"
-                                     Style="{StaticResource ModernChipStyle}" />
+                        <RadioButton
+                            Grid.Column="3"
+                            Content="Anual"
+                            Style="{StaticResource ModernChipStyle}"
+                            Value="{x:Static enums:RecurrenceType.Yearly}" />
                     </Grid>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout Spacing="5"
-                                     IsVisible="{Binding IsSingleDateVisible}">
-                    
-                    <Label Text="Data da Tarefa"
-                           TextColor="{StaticResource TextColor}"
-                           FontAttributes="Bold" Margin="5,0,0,0"/>
+                <VerticalStackLayout IsVisible="{Binding IsSingleDateVisible}" Spacing="5">
 
-                    <Border Stroke="{StaticResource LightTextColor}"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 10" 
-                            BackgroundColor="{StaticResource CardBackgroundColor}"
-                            Padding="8,0">
+                    <Label
+                        Margin="5,0,0,0"
+                        FontAttributes="Bold"
+                        Text="Data da Tarefa"
+                        TextColor="{StaticResource TextColor}" />
 
-                        <DatePicker Date="{Binding StartDate}" 
-                                    TextColor="{StaticResource PrimaryDarkText}" />
+                    <Border
+                        Padding="8,0"
+                        BackgroundColor="{StaticResource CardBackgroundColor}"
+                        Stroke="{StaticResource LightTextColor}"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1">
+
+                        <DatePicker Date="{Binding StartDate}" TextColor="{StaticResource PrimaryDarkText}" />
                     </Border>
                 </VerticalStackLayout>
 
 
-                <Grid ColumnDefinitions="*, *" 
-                      ColumnSpacing="15"
-                      IsVisible="{Binding IsTimeframeVisible}">
+                <Grid
+                    ColumnDefinitions="*, *"
+                    ColumnSpacing="15"
+                    IsVisible="{Binding IsTimeframeVisible}">
 
                     <VerticalStackLayout Grid.Column="0" Spacing="5">
 
-                        <Label Text="Início" TextColor="{StaticResource TextColor}" FontAttributes="Bold" Margin="5,0,0,0"/>
+                        <Label
+                            Margin="5,0,0,0"
+                            FontAttributes="Bold"
+                            Text="Início"
+                            TextColor="{StaticResource TextColor}" />
 
-                        <Border Stroke="{StaticResource LightTextColor}"
-                                StrokeThickness="1"
-                                StrokeShape="RoundRectangle 10" 
-                                BackgroundColor="{StaticResource CardBackgroundColor}"
-                                Padding="10,0">
-                            
-                            <DatePicker Date="{Binding StartDate}" 
-                                        TextColor="{StaticResource PrimaryDarkText}" />
+                        <Border
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource CardBackgroundColor}"
+                            Stroke="{StaticResource LightTextColor}"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1">
+
+                            <DatePicker Date="{Binding StartDate}" TextColor="{StaticResource PrimaryDarkText}" />
                         </Border>
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout Grid.Column="1" 
-                                         Spacing="5">
-                        
-                        <Label Text="Prazo Final" 
-                               TextColor="{StaticResource TextColor}"
-                               FontAttributes="Bold" 
-                               Margin="5,0,0,0"/>
-                        
-                        <Border Stroke="{StaticResource LightTextColor}"
-                                StrokeThickness="1" 
-                                StrokeShape="RoundRectangle 10"
-                                BackgroundColor="{StaticResource CardBackgroundColor}" 
-                                Padding="10,0">
-                            
-                            <DatePicker Date="{Binding EndDate}" 
-                                        TextColor="{StaticResource PrimaryDarkText}" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+
+                        <Label
+                            Margin="5,0,0,0"
+                            FontAttributes="Bold"
+                            Text="Prazo Final"
+                            TextColor="{StaticResource TextColor}" />
+
+                        <Border
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource CardBackgroundColor}"
+                            Stroke="{StaticResource LightTextColor}"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1">
+
+                            <DatePicker Date="{Binding EndDate}" TextColor="{StaticResource PrimaryDarkText}" />
                         </Border>
                     </VerticalStackLayout>
                 </Grid>
 
-                <VerticalStackLayout Spacing="4"
-                                     IsVisible="{Binding IsTimeBoxVisible}">
-                    <Label Text="Período" 
-                           TextColor="{StaticResource TextColor}" 
-                           FontAttributes="Bold"/>
+                <VerticalStackLayout IsVisible="{Binding IsTimeBoxVisible}" Spacing="4">
+                    <Label
+                        FontAttributes="Bold"
+                        Text="Período"
+                        TextColor="{StaticResource TextColor}" />
 
-                    <Border Stroke="{StaticResource LightTextColor}" StrokeThickness="1"
-                            StrokeShape="RoundRectangle 10" 
-                            Padding="4, 0"
-                            BackgroundColor="{StaticResource CardBackgroundColor}">
+                    <Border
+                        Padding="4,0"
+                        BackgroundColor="{StaticResource CardBackgroundColor}"
+                        Stroke="{StaticResource LightTextColor}"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1">
 
-                        <Picker ItemsSource="{Binding TimeBoxOptions}"
-                            SelectedItem="{Binding SelectedTimeBox}"
+                        <Picker
                             Title="Selecione o período"
+                            ItemsSource="{Binding TimeBoxOptions}"
+                            SelectedItem="{Binding SelectedTimeBox}"
                             TextColor="{StaticResource PrimaryDarkText}" />
                     </Border>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout Spacing="4"
-                                     RadioButtonGroup.GroupName="EffortGroup"
-                                     RadioButtonGroup.SelectedValue="{Binding SelectedEffortLevel, Mode=TwoWay}">
+                <VerticalStackLayout
+                    RadioButtonGroup.GroupName="EffortGroup"
+                    RadioButtonGroup.SelectedValue="{Binding SelectedEffortLevel, Mode=TwoWay}"
+                    Spacing="4">
 
-                    <Label Text="Nível de Esforço" 
-                           TextColor="{StaticResource TextColor}" 
-                           FontAttributes="Bold"/>
+                    <Label
+                        FontAttributes="Bold"
+                        Text="Nível de Esforço"
+                        TextColor="{StaticResource TextColor}" />
 
-                    <Grid ColumnDefinitions="*, *, *" 
-                          ColumnSpacing="10">
-                        <RadioButton Grid.Column="0" 
-                                     Content="Leve" 
-                                     Value="{x:Static enums:EffortLevel.Light}"
-                                     Style="{StaticResource ModernChipStyle}" />
+                    <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10">
+                        <RadioButton
+                            Grid.Column="0"
+                            Content="Leve"
+                            Style="{StaticResource ModernChipStyle}"
+                            Value="{x:Static enums:EffortLevel.Light}" />
 
-                        <RadioButton Grid.Column="1" 
-                                     Content="Médio" 
-                                     Value="{x:Static enums:EffortLevel.Medium}"
-                                     Style="{StaticResource ModernChipStyle}" />
+                        <RadioButton
+                            Grid.Column="1"
+                            Content="Médio"
+                            Style="{StaticResource ModernChipStyle}"
+                            Value="{x:Static enums:EffortLevel.Medium}" />
 
-                        <RadioButton Grid.Column="2" 
-                                     Content="Pesado" 
-                                     Value="{x:Static enums:EffortLevel.Heavy}"
-                                     Style="{StaticResource ModernChipStyle}" />
+                        <RadioButton
+                            Grid.Column="2"
+                            Content="Pesado"
+                            Style="{StaticResource ModernChipStyle}"
+                            Value="{x:Static enums:EffortLevel.Heavy}" />
                     </Grid>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout Spacing="4"
-                                     RadioButtonGroup.GroupName="PriorityGroup"
-                                     RadioButtonGroup.SelectedValue="{Binding SelectedPriority, Mode=TwoWay}">
+                <VerticalStackLayout
+                    RadioButtonGroup.GroupName="PriorityGroup"
+                    RadioButtonGroup.SelectedValue="{Binding SelectedPriority, Mode=TwoWay}"
+                    Spacing="4">
 
-                    <Label Text="Prioridade" 
-                           TextColor="{StaticResource TextColor}" 
-                           FontAttributes="Bold"/>
+                    <Label
+                        FontAttributes="Bold"
+                        Text="Prioridade"
+                        TextColor="{StaticResource TextColor}" />
 
-                    <Grid ColumnDefinitions="*, *, *"
-                          ColumnSpacing="8">
+                    <Grid ColumnDefinitions="*, *, *" ColumnSpacing="8">
 
-                        <RadioButton Content="Baixa" 
-                                     Value="{x:Static enums:PriorityLevel.Low}"
-                                     Style="{StaticResource ModernChipStyle}"/>
+                        <RadioButton
+                            Content="Baixa"
+                            Style="{StaticResource ModernChipStyle}"
+                            Value="{x:Static enums:PriorityLevel.Low}" />
 
-                        <RadioButton Grid.Column="1" 
-                                     Content="Média" 
-                                     Value="{x:Static enums:PriorityLevel.Medium}"
-                                     Style="{StaticResource ModernChipStyle}"/>
+                        <RadioButton
+                            Grid.Column="1"
+                            Content="Média"
+                            Style="{StaticResource ModernChipStyle}"
+                            Value="{x:Static enums:PriorityLevel.Medium}" />
 
-                        <RadioButton Grid.Column="2" 
-                                     Content="Alta" 
-                                     Value="{x:Static enums:PriorityLevel.High}"
-                                     Style="{StaticResource ModernChipStyle}"/>
+                        <RadioButton
+                            Grid.Column="2"
+                            Content="Alta"
+                            Style="{StaticResource ModernChipStyle}"
+                            Value="{x:Static enums:PriorityLevel.High}" />
                     </Grid>
                 </VerticalStackLayout>
             </VerticalStackLayout>
 
-            <Button Grid.Row="1"
-                    Text="Criar Tarefa"/>
+            <Button Grid.Row="1" Text="Criar Tarefa" />
         </Grid>
     </ScrollView>
 </ContentPage>
