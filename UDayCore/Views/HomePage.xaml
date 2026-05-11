@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:entities="clr-namespace:UDayCore.Models.Entities"
+    xmlns:material="clr-namespace:MauiIcons.Material;assembly=MauiIcons.Material"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModelItems="clr-namespace:UDayCore.ViewModels.Items"
     xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
@@ -39,7 +40,13 @@
                     StrokeThickness="0"
                     WidthRequest="24">
 
-                    <Image Aspect="AspectFill" Source="user.png" />
+                    <ImageButton
+                        Padding="0"
+                        Aspect="AspectFill"
+                        Background="Transparent"
+                        Source="{material:Material Icon=AccountCircle,
+                                                   IconColor={StaticResource Primary},
+                                                   IconSize=24}" />
                 </Border>
 
                 <Border
@@ -52,7 +59,9 @@
                         Padding="0"
                         Aspect="AspectFill"
                         BackgroundColor="Transparent"
-                        Source="bell.png" />
+                        Source="{material:Material Icon=Notifications,
+                                                   IconColor={StaticResource Primary},
+                                                   IconSize=24}" />
                 </Border>
             </HorizontalStackLayout>
         </Grid>
@@ -181,32 +190,47 @@
 
                                 <Border
                                     x:Name="TaskBackBody"
-                                    Padding="16"
-                                    BackgroundColor="{StaticResource Primary}"
+                                    Padding="16,8,16,16"
+                                    BackgroundColor="{StaticResource CardBackgroundColor}"
                                     IsVisible="{Binding IsAwaitingFeedback}"
                                     StrokeShape="RoundRectangle 8">
 
-                                    <Grid RowDefinitions="32 , *">
+                                    <Grid RowDefinitions="Auto , *" RowSpacing="8">
 
-                                        <Button
-                                            Grid.Row="0"
-                                            Padding="0"
-                                            BackgroundColor="DarkRed"
-                                            Clicked="OnCardBackClicked"
-                                            HorizontalOptions="Start"
-                                            Text="B"
-                                            WidthRequest="32" />
-
-                                        <HorizontalStackLayout
-                                            Grid.Row="1"
-                                            HorizontalOptions="Center"
-                                            Spacing="20"
-                                            VerticalOptions="Center">
-
-                                            <Button BackgroundColor="{StaticResource Secondary}" Text="Leve" />
-                                            <Button BackgroundColor="{StaticResource Secondary}" Text="Regular" />
-                                            <Button BackgroundColor="{StaticResource Secondary}" Text="Pesado" />
+                                        <HorizontalStackLayout Grid.Row="0" Spacing="8">
+                                            <ImageButton
+                                                Grid.Row="0"
+                                                Padding="4"
+                                                Clicked="OnTaskBackClicked"
+                                                Source="{material:Material Icon=ArrowBack,
+                                                                           IconColor={StaticResource Primary},
+                                                                           IconSize=24}" />
+                                            <Label
+                                                Text="Selecione o esforço exigido" 
+                                                VerticalTextAlignment="Center"
+                                                FontSize="16"
+                                                FontAttributes="Bold"
+                                                Padding="4"/>
                                         </HorizontalStackLayout>
+
+                                        <Grid
+                                            Grid.Row="1"
+                                            ColumnDefinitions="* ,* ,*"
+                                            ColumnSpacing="4">
+
+                                            <Button
+                                                Grid.Column="0"
+                                                BackgroundColor="{StaticResource Primary}"
+                                                Text="Leve" />
+                                            <Button
+                                                Grid.Column="1"
+                                                BackgroundColor="{StaticResource Primary}"
+                                                Text="Regular" />
+                                            <Button
+                                                Grid.Column="2"
+                                                BackgroundColor="{StaticResource Primary}"
+                                                Text="Pesado" />
+                                        </Grid>
                                     </Grid>
                                 </Border>
                             </Grid>

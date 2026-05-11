@@ -6,12 +6,12 @@ namespace UDayCore.Views;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage(HomeViewModel viewModel)
-	{
-		InitializeComponent();
+    public HomePage(HomeViewModel viewModel)
+    {
+        InitializeComponent();
 
         BindingContext = viewModel;
-	}
+    }
 
     protected override void OnAppearing()
     {
@@ -55,34 +55,53 @@ public partial class HomePage : ContentPage
         }
     }
 
-    private async void OnCardBackClicked(object sender, EventArgs e)
+    private async void OnTaskBackClicked(object sender, EventArgs e)
     {
-        // 1. Verifica se quem chamou foi um botão e se o contexto é o nosso Wrapper
-        if (sender is Button btn && btn.BindingContext is TaskItemWrapper wrapper)
+        if (sender is ImageButton btn && btn.BindingContext is TaskItemWrapper wrapper)
         {
-            // 2. Busca o contêiner visual principal para animar (a Grid principal do card)
-            // Como o botão está dentro de um Layout > Grid > Border, subimos a árvore visual
             if (btn.Parent?.Parent?.Parent is VisualElement cardContainer)
             {
-                // Animação de saída: Some e encolhe
                 await Task.WhenAll(
-                    cardContainer.FadeTo(0, 150),
-                    cardContainer.ScaleTo(0.95, 150)
+                    cardContainer.FadeToAsync(0, 150),
+                    cardContainer.ScaleToAsync(0.95, 150)
                 );
 
-                // 3. A MÁGICA ACONTECE AQUI: Muda o estado para revelar a frente
                 wrapper.IsAwaitingFeedback = false;
-                wrapper.IsCheckBoxChecked = false; 
+                wrapper.IsCheckBoxChecked = false;
 
-                // Animação de entrada: Reaparece com efeito de mola
                 await Task.WhenAll(
-                    cardContainer.ScaleTo(1, 150, Easing.SpringOut),
-                    cardContainer.FadeTo(1, 150)
+                    cardContainer.ScaleToAsync(1, 150, Easing.SpringOut),
+                    cardContainer.FadeToAsync(1, 150)
                 );
             }
             else
             {
-                // Fallback de segurança caso a árvore visual mude no futuro
+                wrapper.IsAwaitingFeedback = false;
+            }
+        }
+    }
+
+    private async void OnEffortSelected(object sender, EventArgs e)
+    {
+        if (sender is Button btn && btn.BindingContext is TaskItemWrapper wrapper)
+        {
+            if (btn.Parent?.Parent?.Parent is VisualElement cardContainer)
+            {
+                await Task.WhenAll(
+                    cardContainer.FadeToAsync(0, 150),
+                    cardContainer.ScaleToAsync(0.95, 150)
+                );
+
+                wrapper.IsAwaitingFeedback = false;
+                wrapper.Task.IsCompleted = true;
+
+                await Task.WhenAll(
+                    cardContainer.ScaleToAsync(1, 150, Easing.SpringOut),
+                    cardContainer.FadeToAsync(1, 150)
+                );
+            }
+            else
+            {
                 wrapper.IsAwaitingFeedback = false;
             }
         }
