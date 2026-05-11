@@ -1,9 +1,12 @@
+using UDayCore.ViewModels;
+
 namespace UDayCore.Views;
 
 public partial class CreateTaskPage : ContentPage
 {
-	public CreateTaskPage()
+	public CreateTaskPage(CreateTaskViewModel viewModel)
 	{
 		InitializeComponent();
+		BindingContext = viewModel;
 	}
 }

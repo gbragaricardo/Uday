@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 using UDayCore.Data;
 using UDayCore.Models.Entities;
 
@@ -14,7 +12,14 @@ namespace UDayCore.Services
 
             db.TaskItems.Add(newTask);
             await db.SaveChangesAsync();
+        }
 
+        public async Task<IList<TaskItem>> GetTaskItemsAsync()
+        {
+            using var db = new UDayDbContext();
+            var taskItems = await db.TaskItems.AsNoTracking().ToListAsync();
+            
+            return taskItems;
         }
     }
 }

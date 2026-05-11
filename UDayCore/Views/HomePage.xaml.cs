@@ -1,15 +1,23 @@
+using UDayCore.ViewModels;
+
 namespace UDayCore.Views;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage()
+	public HomePage(HomeViewModel viewModel)
 	{
 		InitializeComponent();
+
+        BindingContext = viewModel;
 	}
 
-    // Método que o botão do XAML vai chamar
-    private async void OnTestarTelaClicked(object sender, EventArgs e)
+    protected override void OnAppearing()
     {
-        await Navigation.PushAsync(new CreateTaskPage());
+        base.OnAppearing();
+
+        if (BindingContext is HomeViewModel vm)
+        {
+            vm.LoadTaskItemsCommand.Execute(null);
+        }
     }
 }

@@ -6,17 +6,20 @@
     xmlns:controls="clr-namespace:UDayCore.Controls"
     xmlns:enums="clr-namespace:UDayCore.Models.Enums"
     xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
-    Title="CreateT askPage">
+    x:DataType="viewModels:CreateTaskViewModel"
+    Title="Create TaskPage">
 
-    <ContentPage.BindingContext>
-        <viewModels:CreateTaskViewModel />
-    </ContentPage.BindingContext>
+    <ScrollView
+        Padding="16">
+        <Grid
+            RowDefinitions="*, Auto">
+            <VerticalStackLayout
+                Grid.Row="0"
+                Spacing="16"
+                Padding="0, 16">
 
-    <ScrollView Padding="16">
-        <Grid RowDefinitions="*, Auto">
-            <VerticalStackLayout Grid.Row="0" Spacing="16">
-
-                <VerticalStackLayout Spacing="4">
+                <VerticalStackLayout
+                    Spacing="4">
 
                     <Label
                         FontAttributes="Bold"
@@ -34,11 +37,13 @@
                             MaxLength="60"
                             Placeholder="Título"
                             PlaceholderColor="{StaticResource LightTextColor}"
-                            TextColor="{StaticResource PrimaryDarkText}" />
+                            TextColor="{StaticResource PrimaryDarkText}"
+                            Text="{Binding Title, Mode=TwoWay}"/>
                     </Border>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout Spacing="4">
+                <VerticalStackLayout
+                    Spacing="4">
 
                     <Label
                         FontAttributes="Bold"
@@ -57,18 +62,22 @@
                             MaxLength="450"
                             Placeholder="Descrição (opcional)"
                             PlaceholderColor="{StaticResource LightTextColor}"
-                            TextColor="{StaticResource PrimaryDarkText}" />
+                            TextColor="{StaticResource PrimaryDarkText}"
+                            Text="{Binding Description, Mode=TwoWay}" />
                     </Border>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout BackgroundColor="{StaticResource CardBackgroundColor}" Spacing="4">
+                <VerticalStackLayout
+                    BackgroundColor="{StaticResource CardBackgroundColor}"
+                    Spacing="4">
 
                     <Label
                         FontAttributes="Bold"
                         Text="Duração estimada:"
                         TextColor="{StaticResource TextColor}" />
 
-                    <HorizontalStackLayout Spacing="16">
+                    <HorizontalStackLayout
+                        Spacing="16">
 
                         <Border
                             Padding="24,0"
@@ -81,7 +90,7 @@
                             <Label
                                 FontSize="14"
                                 HorizontalOptions="Center"
-                                Text="{Binding Duration, StringFormat='{0} minutos'}"
+                                Text="{Binding EstimatedDurationMinutes, StringFormat='{0} minutos'}"
                                 TextColor="{StaticResource PrimaryDarkText}"
                                 VerticalOptions="Center" />
                         </Border>
@@ -91,12 +100,13 @@
                             Increment="15"
                             Maximum="240"
                             Minimum="15"
-                            Value="{Binding Duration}" />
+                            Value="{Binding EstimatedDurationMinutes}" />
 
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout Spacing="4">
+                <VerticalStackLayout
+                    Spacing="4">
 
                     <Label
                         FontAttributes="Bold"
@@ -157,7 +167,9 @@
                     </Grid>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout IsVisible="{Binding IsSingleDateVisible}" Spacing="5">
+                <VerticalStackLayout
+                    IsVisible="{Binding IsSingleDateVisible}"
+                    Spacing="5">
 
                     <Label
                         Margin="5,0,0,0"
@@ -172,7 +184,9 @@
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="1">
 
-                        <DatePicker Date="{Binding StartDate}" TextColor="{StaticResource PrimaryDarkText}" />
+                        <DatePicker
+                            Date="{Binding DueDate}"
+                            TextColor="{StaticResource PrimaryDarkText}" />
                     </Border>
                 </VerticalStackLayout>
 
@@ -182,7 +196,9 @@
                     ColumnSpacing="15"
                     IsVisible="{Binding IsTimeframeVisible}">
 
-                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        Spacing="5">
 
                         <Label
                             Margin="5,0,0,0"
@@ -197,11 +213,15 @@
                             StrokeShape="RoundRectangle 10"
                             StrokeThickness="1">
 
-                            <DatePicker Date="{Binding StartDate}" TextColor="{StaticResource PrimaryDarkText}" />
+                            <DatePicker
+                                Date="{Binding AvailableFrom}"
+                                TextColor="{StaticResource PrimaryDarkText}" />
                         </Border>
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        Spacing="5">
 
                         <Label
                             Margin="5,0,0,0"
@@ -216,12 +236,16 @@
                             StrokeShape="RoundRectangle 10"
                             StrokeThickness="1">
 
-                            <DatePicker Date="{Binding EndDate}" TextColor="{StaticResource PrimaryDarkText}" />
+                            <DatePicker
+                                Date="{Binding DueDate}"
+                                TextColor="{StaticResource PrimaryDarkText}" />
                         </Border>
                     </VerticalStackLayout>
                 </Grid>
 
-                <VerticalStackLayout IsVisible="{Binding IsTimeBoxVisible}" Spacing="4">
+                <VerticalStackLayout
+                    IsVisible="{Binding IsTimeBoxVisible}"
+                    Spacing="4">
                     <Label
                         FontAttributes="Bold"
                         Text="Período"
@@ -238,7 +262,7 @@
                             Title="Selecione o período"
                             ItemsSource="{Binding TimeBoxOptions}"
                             SelectedItem="{Binding SelectedTimeBox}"
-                            TextColor="{StaticResource PrimaryDarkText}" />
+                            TextColor="{StaticResource PrimaryDarkText}"/>
                     </Border>
                 </VerticalStackLayout>
 
@@ -252,7 +276,9 @@
                         Text="Nível de Esforço"
                         TextColor="{StaticResource TextColor}" />
 
-                    <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10">
+                    <Grid
+                        ColumnDefinitions="*, *, *"
+                        ColumnSpacing="10">
                         <RadioButton
                             Grid.Column="0"
                             Content="Leve"
@@ -283,7 +309,9 @@
                         Text="Prioridade"
                         TextColor="{StaticResource TextColor}" />
 
-                    <Grid ColumnDefinitions="*, *, *" ColumnSpacing="8">
+                    <Grid
+                        ColumnDefinitions="*, *, *"
+                        ColumnSpacing="8">
 
                         <RadioButton
                             Content="Baixa"
@@ -305,7 +333,10 @@
                 </VerticalStackLayout>
             </VerticalStackLayout>
 
-            <Button Grid.Row="1" Text="Criar Tarefa" />
+            <Button
+                Grid.Row="1"
+                Text="Criar Tarefa"
+                Command="{Binding CreateTaskItemCommand}"/>
         </Grid>
     </ScrollView>
 </ContentPage>

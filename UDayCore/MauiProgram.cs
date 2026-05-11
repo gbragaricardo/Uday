@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
+using UDayCore.ViewModels;
+using UDayCore.Views;
 
 namespace UDayCore
 {
@@ -9,12 +12,22 @@ namespace UDayCore
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<UDayCore.Services.TaskItemService>();
+
+            builder.Services.AddTransient<UDayCore.ViewModels.HomeViewModel>();
+            builder.Services.AddTransient<UDayCore.Views.HomePage>();
+
+            builder.Services.AddTransient<CreateTaskViewModel>();
+            builder.Services.AddTransient<CreateTaskPage>();
+
+            #region IFs FEIOS
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
@@ -50,6 +63,7 @@ namespace UDayCore
                 handler.PlatformView.Background = null;
 #endif
             });
+            #endregion
 
             return builder.Build();
         }

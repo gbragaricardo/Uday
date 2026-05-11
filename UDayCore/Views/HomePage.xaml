@@ -3,17 +3,13 @@
     x:Class="UDayCore.Views.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
+    xmlns:entities="clr-namespace:UDayCore.Models.Entities"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="viewModels:HomeViewModel"
     Title="HomePage"
     NavigationPage.HasNavigationBar="False"
-    Shell.NavBarIsVisible="False"
-    mc:Ignorable="d">
-
-    <ContentPage.BindingContext>
-        <viewModels:HomeViewModel />
-    </ContentPage.BindingContext>
+    Shell.NavBarIsVisible="False">
 
     <Grid
         Padding="16"
@@ -122,14 +118,14 @@
                 </Grid>
             </Border>
 
-            <CollectionView Grid.Row="2" ItemsSource="{Binding MockTasks}">
+            <CollectionView Grid.Row="2" ItemsSource="{Binding TaskItems}">
 
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="16" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="entities:TaskItem">
                         <Border
                             Padding="0,16"
                             MinimumHeightRequest="80"
@@ -174,7 +170,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-
+        
         <Border
             Grid.Row="2"
             BackgroundColor="{StaticResource Primary}"
@@ -182,18 +178,12 @@
             HorizontalOptions="End"
             StrokeShape="Ellipse"
             WidthRequest="64">
-            <Label
+            <Button
                 BackgroundColor="Transparent"
                 FontSize="32"
-                HorizontalTextAlignment="Center"
                 Text="+"
                 TextColor="White"
-                VerticalTextAlignment="Center" />
-
-            <Border.GestureRecognizers>
-
-                <TapGestureRecognizer Tapped="OnTestarTelaClicked" />
-            </Border.GestureRecognizers>
+                Command="{Binding OpenCreateTaskPageCommand}"/>
         </Border>
     </Grid>
 </ContentPage>
