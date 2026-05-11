@@ -24,18 +24,12 @@
                 Route="HomePage" />
         </Tab>
 
-        <Tab Title="Tasks">
+        <Tab
+            Title="Tasks">
             <ShellContent
                 Title="Tasks"
                 ContentTemplate="{DataTemplate views:TasksPage}"
                 Route="TasksPage" />
-        </Tab>
-
-        <Tab Title="DailyLog">
-            <ShellContent
-                Title="DailyLog"
-                ContentTemplate="{DataTemplate views:DailyLogPage}"
-                Route="DailyLogPage" />
         </Tab>
     </TabBar>
 

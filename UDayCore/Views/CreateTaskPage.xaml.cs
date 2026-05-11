@@ -6,7 +6,7 @@ public partial class CreateTaskPage : ContentPage
 {
 	public CreateTaskPage(CreateTaskViewModel viewModel)
 	{
-		InitializeComponent();
+        InitializeComponent();
 		BindingContext = viewModel;
 	}
 }

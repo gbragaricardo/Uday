@@ -7,6 +7,7 @@ using System.Text;
 using UDayCore.Models.Entities;
 using UDayCore.Models.Enums;
 using UDayCore.Services;
+using UDayCore.ViewModels.Items;
 using UDayCore.Views;
 
 namespace UDayCore.ViewModels
@@ -14,31 +15,10 @@ namespace UDayCore.ViewModels
     public partial class HomeViewModel : ObservableObject
     {
         private readonly TaskItemService _taskItemService;
-        public ObservableCollection<TaskItem> MockTasks { get; set; } = [];
-        public ObservableCollection<TaskItem> TaskItems { get; set; } = [];
+        public ObservableCollection<TaskItemWrapper> TaskItems { get; set; } = [];
 
         public HomeViewModel(TaskItemService taskItemService)
         {
-            MockTasks.Add(new TaskItem
-            {
-                Id = 1,
-                Title = "Validar requisitos do Plugin Revit",
-                EstimatedDurationMinutes = 90,
-                DueDate = DateTime.Now,
-                Priority = PriorityLevel.High,
-                EffortLevel = EffortLevel.Heavy
-            });
-
-            MockTasks.Add(new TaskItem
-            {
-                Id = 2,
-                Title = "Finalizar tela de audiências Angular",
-                EstimatedDurationMinutes = 120,
-                DueDate = DateTime.Now,
-                Priority = PriorityLevel.Medium,
-                EffortLevel = EffortLevel.Medium
-            });
-            
             _taskItemService = taskItemService;
         }
 
@@ -50,7 +30,7 @@ namespace UDayCore.ViewModels
             TaskItems.Clear();
 
             foreach (var item in dbTaskItems)
-                TaskItems.Add(item);
+                TaskItems.Add(new TaskItemWrapper(item));
         }
 
         [RelayCommand]

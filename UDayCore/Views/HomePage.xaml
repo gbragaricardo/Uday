@@ -3,13 +3,18 @@
     x:Class="UDayCore.Views.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
     xmlns:entities="clr-namespace:UDayCore.Models.Entities"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    x:DataType="viewModels:HomeViewModel"
+    xmlns:viewModelItems="clr-namespace:UDayCore.ViewModels.Items"
+    xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
     Title="HomePage"
+    x:DataType="viewModels:HomeViewModel"
     NavigationPage.HasNavigationBar="False"
     Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    </ContentPage.Resources>
 
     <Grid
         Padding="16"
@@ -125,52 +130,92 @@
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="entities:TaskItem">
-                        <Border
-                            Padding="0,16"
-                            MinimumHeightRequest="80"
-                            StrokeShape="RoundRectangle 8">
-                            
-                            <Grid ColumnDefinitions="64, *">
-                                <CheckBox Grid.Column="0"
-                                          Scale="1.5"/>
+                    <DataTemplate x:DataType="viewModelItems:TaskItemWrapper">
+                        <Border MinimumHeightRequest="80" StrokeShape="RoundRectangle 8">
+
+                            <Grid x:Name="TaskBody">
 
                                 <Grid
-                                    Grid.Column="1"
-                                    RowDefinitions="*, Auto"
-                                    RowSpacing="16">
+                                    x:Name="TaskFrontBody"
+                                    Padding="0,16"
+                                    ColumnDefinitions="64, *"
+                                    IsVisible="{Binding IsAwaitingFeedback, Converter={StaticResource InvertedBoolConverter}}">
+                                    <CheckBox
+                                        x:Name="TaskCheckBox"
+                                        Grid.Column="0"
+                                        CheckedChanged="OnTaskCheckedChanged"
+                                        IsChecked="{Binding IsCheckBoxChecked}"
+                                        Scale="1.5" />
 
-                                    <Label
-                                        Grid.Row="0"
-                                        FontAttributes="Bold"
-                                        FontSize="18"
-                                        Text="{Binding Title}" />
+                                    <Grid
+                                        x:Name="TaskInfos"
+                                        Grid.Column="1"
+                                        RowDefinitions="*, Auto"
+                                        RowSpacing="16">
 
-                                    <HorizontalStackLayout Grid.Row="1" Spacing="16">
-                                        <Border
-                                            Padding="8"
-                                            Background="LightGrey"
-                                            StrokeShape="RoundRectangle 4"
-                                            StrokeThickness="1">
-                                            <Label Text="{Binding DueDate}" />
-                                        </Border>
+                                        <Label
+                                            Grid.Row="0"
+                                            FontAttributes="Bold"
+                                            FontSize="18"
+                                            Text="{Binding Task.Title}" />
 
-                                        <Border
-                                            Padding="8"
-                                            Background="LightYellow"
-                                            StrokeShape="RoundRectangle 4"
-                                            StrokeThickness="1">
-                                            <Label Text="{Binding Priority}" />
-                                        </Border>
-                                    </HorizontalStackLayout>
+                                        <HorizontalStackLayout Grid.Row="1" Spacing="16">
+                                            <Border
+                                                Padding="8"
+                                                Background="LightGrey"
+                                                StrokeShape="RoundRectangle 4"
+                                                StrokeThickness="1">
+                                                <Label Text="{Binding Task.DueDate}" />
+                                            </Border>
+
+                                            <Border
+                                                Padding="8"
+                                                Background="LightYellow"
+                                                StrokeShape="RoundRectangle 4"
+                                                StrokeThickness="1">
+                                                <Label Text="{Binding Task.Priority}" />
+                                            </Border>
+                                        </HorizontalStackLayout>
+                                    </Grid>
                                 </Grid>
+
+                                <Border
+                                    x:Name="TaskBackBody"
+                                    Padding="16"
+                                    BackgroundColor="{StaticResource Primary}"
+                                    IsVisible="{Binding IsAwaitingFeedback}"
+                                    StrokeShape="RoundRectangle 8">
+
+                                    <Grid RowDefinitions="32 , *">
+
+                                        <Button
+                                            Grid.Row="0"
+                                            Padding="0"
+                                            BackgroundColor="DarkRed"
+                                            Clicked="OnCardBackClicked"
+                                            HorizontalOptions="Start"
+                                            Text="B"
+                                            WidthRequest="32" />
+
+                                        <HorizontalStackLayout
+                                            Grid.Row="1"
+                                            HorizontalOptions="Center"
+                                            Spacing="20"
+                                            VerticalOptions="Center">
+
+                                            <Button BackgroundColor="{StaticResource Secondary}" Text="Leve" />
+                                            <Button BackgroundColor="{StaticResource Secondary}" Text="Regular" />
+                                            <Button BackgroundColor="{StaticResource Secondary}" Text="Pesado" />
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </Border>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-        
+
         <Border
             Grid.Row="2"
             BackgroundColor="{StaticResource Primary}"
@@ -180,10 +225,10 @@
             WidthRequest="64">
             <Button
                 BackgroundColor="Transparent"
+                Command="{Binding OpenCreateTaskPageCommand}"
                 FontSize="32"
                 Text="+"
-                TextColor="White"
-                Command="{Binding OpenCreateTaskPageCommand}"/>
+                TextColor="White" />
         </Border>
     </Grid>
 </ContentPage>
