@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using MauiIcons.Material;
 using Microsoft.Extensions.Logging;
 using UDayCore.ViewModels;
 using UDayCore.Views;
@@ -13,6 +14,7 @@ namespace UDayCore
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseMaterialMauiIcons()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
