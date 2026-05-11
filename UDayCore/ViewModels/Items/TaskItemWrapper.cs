@@ -12,6 +12,7 @@ namespace UDayCore.ViewModels.Items
 
         [ObservableProperty] public partial bool IsAwaitingFeedback { get; set; }
         [ObservableProperty] public partial bool IsCheckBoxChecked { get; set; }
+        [ObservableProperty] public partial bool IsCompleted { get; set; }
 
         public TaskItemWrapper(TaskItem task)
         {

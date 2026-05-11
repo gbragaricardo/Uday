@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:entities="clr-namespace:UDayCore.Models.Entities"
+    xmlns:enums="clr-namespace:UDayCore.Models.Enums"
     xmlns:material="clr-namespace:MauiIcons.Material;assembly=MauiIcons.Material"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModelItems="clr-namespace:UDayCore.ViewModels.Items"
@@ -140,18 +141,32 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewModelItems:TaskItemWrapper">
-                        <Border MinimumHeightRequest="80" StrokeShape="RoundRectangle 8">
+                        <Border
+                            MinimumHeightRequest="80"
+                            Opacity="1"
+                            StrokeShape="RoundRectangle 8">
+
+                            <Border.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsCompleted}"
+                                    TargetType="Border"
+                                    Value="True">
+                                    <Setter Property="Opacity" Value="0.5" />
+                                </DataTrigger>
+                            </Border.Triggers>
 
                             <Grid x:Name="TaskBody">
-
                                 <Grid
                                     x:Name="TaskFrontBody"
                                     Padding="0,16"
                                     ColumnDefinitions="64, *"
+                                    ColumnSpacing="8"
                                     IsVisible="{Binding IsAwaitingFeedback, Converter={StaticResource InvertedBoolConverter}}">
                                     <CheckBox
                                         x:Name="TaskCheckBox"
                                         Grid.Column="0"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
                                         CheckedChanged="OnTaskCheckedChanged"
                                         IsChecked="{Binding IsCheckBoxChecked}"
                                         Scale="1.5" />
@@ -166,7 +181,21 @@
                                             Grid.Row="0"
                                             FontAttributes="Bold"
                                             FontSize="18"
-                                            Text="{Binding Task.Title}" />
+                                            Text="{Binding Task.Title}"
+                                            TextColor="{StaticResource PrimaryDarkText}"
+                                            TextDecorations="None">
+                                            <Label.Triggers>
+
+                                                <DataTrigger
+                                                    Binding="{Binding IsCompleted}"
+                                                    TargetType="Label"
+                                                    Value="True">
+
+                                                    <Setter Property="TextDecorations" Value="Strikethrough" />
+                                                    <Setter Property="TextColor" Value="Gray" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
 
                                         <HorizontalStackLayout Grid.Row="1" Spacing="16">
                                             <Border
@@ -206,11 +235,11 @@
                                                                            IconColor={StaticResource Primary},
                                                                            IconSize=24}" />
                                             <Label
-                                                Text="Selecione o esforço exigido" 
-                                                VerticalTextAlignment="Center"
-                                                FontSize="16"
+                                                Padding="4"
                                                 FontAttributes="Bold"
-                                                Padding="4"/>
+                                                FontSize="16"
+                                                Text="Selecione o esforço exigido"
+                                                VerticalTextAlignment="Center" />
                                         </HorizontalStackLayout>
 
                                         <Grid
@@ -221,14 +250,20 @@
                                             <Button
                                                 Grid.Column="0"
                                                 BackgroundColor="{StaticResource Primary}"
+                                                Clicked="OnEffortSelected"
+                                                CommandParameter="{x:Static enums:EffortLevel.Light}"
                                                 Text="Leve" />
                                             <Button
                                                 Grid.Column="1"
                                                 BackgroundColor="{StaticResource Primary}"
+                                                Clicked="OnEffortSelected"
+                                                CommandParameter="{x:Static enums:EffortLevel.Medium}"
                                                 Text="Regular" />
                                             <Button
                                                 Grid.Column="2"
                                                 BackgroundColor="{StaticResource Primary}"
+                                                Clicked="OnEffortSelected"
+                                                CommandParameter="{x:Static enums:EffortLevel.Heavy}"
                                                 Text="Pesado" />
                                         </Grid>
                                     </Grid>

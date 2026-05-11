@@ -25,32 +25,33 @@ public partial class HomePage : ContentPage
 
     private async void OnTaskCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        if (e.Value && sender is CheckBox cb && cb.BindingContext is TaskItemWrapper wrapper)
+        if (sender is CheckBox cb && cb.BindingContext is TaskItemWrapper wrapper)
         {
-
-            if (cb.Parent?.Parent is VisualElement cardContainer)
+            if (e.Value)
             {
-                // PASSO 1: Desaparece e encolhe levemente ao mesmo tempo (150 milissegundos)
-                await Task.WhenAll(
-                    cardContainer.FadeToAsync(0, 150),
-                    cardContainer.ScaleToAsync(0.95, 150)
-                );
+                if (cb.Parent?.Parent is VisualElement cardContainer)
+                {
+                    await Task.WhenAll(
+                        cardContainer.FadeToAsync(0, 150),
+                        cardContainer.ScaleToAsync(0.95, 150)
+                    );
 
-                // PASSO 2: Muda a propriedade. O XAML vai trocar as camadas instantaneamente
-                // (mas o usuário não vai ver o corte seco porque a opacidade está em 0)
-                wrapper.IsAwaitingFeedback = true;
+                    wrapper.IsAwaitingFeedback = true;
 
-                // PASSO 3: Volta ao tamanho normal e reaparece com os botões de feedback
-                await Task.WhenAll(
-                    cardContainer.ScaleToAsync(1, 150, Easing.SpringOut), // Easing.SpringOut dá um efeito de "mola"
-                    cardContainer.FadeToAsync(1, 150)
-                );
+                    await Task.WhenAll(
+                        cardContainer.ScaleToAsync(1, 150, Easing.SpringOut),
+                        cardContainer.FadeToAsync(1, 150)
+                    );
+                }
+                else
+                {
+                    wrapper.IsAwaitingFeedback = true;
+                }
             }
             else
             {
-                // Fallback de segurança: se por algum motivo ele não achar a Grid visual,
-                // ele apenas vira o cartão sem animação para não quebrar o app.
-                wrapper.IsAwaitingFeedback = true;
+                wrapper.IsCompleted = false;
+                wrapper.IsAwaitingFeedback = false;
             }
         }
     }
@@ -93,7 +94,7 @@ public partial class HomePage : ContentPage
                 );
 
                 wrapper.IsAwaitingFeedback = false;
-                wrapper.Task.IsCompleted = true;
+                wrapper.IsCompleted = true;
 
                 await Task.WhenAll(
                     cardContainer.ScaleToAsync(1, 150, Easing.SpringOut),
