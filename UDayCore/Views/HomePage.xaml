@@ -141,135 +141,163 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewModelItems:TaskItemWrapper">
-                        <Border
-                            MinimumHeightRequest="80"
-                            Opacity="1"
-                            StrokeShape="RoundRectangle 8">
+                        <SwipeView>
 
-                            <Border.Triggers>
-                                <DataTrigger
-                                    Binding="{Binding IsCompleted}"
-                                    TargetType="Border"
-                                    Value="True">
-                                    <Setter Property="Opacity" Value="0.5" />
-                                </DataTrigger>
-                            </Border.Triggers>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItemView Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:HomeViewModel}}, Path=DeleteTaskItemCommand}" CommandParameter="{Binding .}">
 
-                            <Grid x:Name="TaskBody">
-                                <Grid
-                                    x:Name="TaskFrontBody"
-                                    Padding="0,16"
-                                    ColumnDefinitions="64, *"
-                                    ColumnSpacing="8"
-                                    IsVisible="{Binding IsAwaitingFeedback, Converter={StaticResource InvertedBoolConverter}}">
-                                    <CheckBox
-                                        x:Name="TaskCheckBox"
-                                        Grid.Column="0"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Center"
-                                        CheckedChanged="OnTaskCheckedChanged"
-                                        IsChecked="{Binding IsCheckBoxChecked}"
-                                        Scale="1.5" />
+                                        <Border
+                                            BackgroundColor="#FF3B30"
+                                            MinimumHeightRequest="80"
+                                            Stroke="{StaticResource CardBackgroundColor}"
+                                            StrokeShape="RoundRectangle 0, 8, 8, 0"
+                                            StrokeThickness="1"
+                                            WidthRequest="80">
 
+                                            <Image
+                                                HeightRequest="32"
+                                                HorizontalOptions="Center"
+                                                Source="{material:Material Icon=DeleteForever,
+                                                                       IconColor=White}"
+                                                VerticalOptions="Center"
+                                                WidthRequest="32" />
+                                        </Border>
+
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Border
+                                BackgroundColor="{StaticResource CardBackgroundColor}"
+                                MinimumHeightRequest="80"
+                                Opacity="1"
+                                StrokeShape="RoundRectangle 8">
+
+                                <Border.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsCompleted}"
+                                        TargetType="Border"
+                                        Value="True">
+                                        <Setter Property="Opacity" Value="0.5" />
+                                    </DataTrigger>
+                                </Border.Triggers>
+
+                                <Grid x:Name="TaskBody">
                                     <Grid
-                                        x:Name="TaskInfos"
-                                        Grid.Column="1"
-                                        RowDefinitions="*, Auto"
-                                        RowSpacing="16">
-
-                                        <Label
-                                            Grid.Row="0"
-                                            FontAttributes="Bold"
-                                            FontSize="18"
-                                            Text="{Binding Task.Title}"
-                                            TextColor="{StaticResource PrimaryDarkText}"
-                                            TextDecorations="None">
-                                            <Label.Triggers>
-
-                                                <DataTrigger
-                                                    Binding="{Binding IsCompleted}"
-                                                    TargetType="Label"
-                                                    Value="True">
-
-                                                    <Setter Property="TextDecorations" Value="Strikethrough" />
-                                                    <Setter Property="TextColor" Value="Gray" />
-                                                </DataTrigger>
-                                            </Label.Triggers>
-                                        </Label>
-
-                                        <HorizontalStackLayout Grid.Row="1" Spacing="16">
-                                            <Border
-                                                Padding="8"
-                                                Background="LightGrey"
-                                                StrokeShape="RoundRectangle 4"
-                                                StrokeThickness="1">
-                                                <Label Text="{Binding Task.DueDate}" />
-                                            </Border>
-
-                                            <Border
-                                                Padding="8"
-                                                Background="LightYellow"
-                                                StrokeShape="RoundRectangle 4"
-                                                StrokeThickness="1">
-                                                <Label Text="{Binding Task.Priority}" />
-                                            </Border>
-                                        </HorizontalStackLayout>
-                                    </Grid>
-                                </Grid>
-
-                                <Border
-                                    x:Name="TaskBackBody"
-                                    Padding="16,8,16,16"
-                                    BackgroundColor="{StaticResource CardBackgroundColor}"
-                                    IsVisible="{Binding IsAwaitingFeedback}"
-                                    StrokeShape="RoundRectangle 8">
-
-                                    <Grid RowDefinitions="Auto , *" RowSpacing="8">
-
-                                        <HorizontalStackLayout Grid.Row="0" Spacing="8">
-                                            <ImageButton
-                                                Grid.Row="0"
-                                                Padding="4"
-                                                Clicked="OnTaskBackClicked"
-                                                Source="{material:Material Icon=ArrowBack,
-                                                                           IconColor={StaticResource Primary},
-                                                                           IconSize=24}" />
-                                            <Label
-                                                Padding="4"
-                                                FontAttributes="Bold"
-                                                FontSize="16"
-                                                Text="Selecione o esforço exigido"
-                                                VerticalTextAlignment="Center" />
-                                        </HorizontalStackLayout>
+                                        x:Name="TaskFrontBody"
+                                        Padding="0,16"
+                                        ColumnDefinitions="64, *"
+                                        ColumnSpacing="8"
+                                        IsVisible="{Binding IsAwaitingFeedback, Converter={StaticResource InvertedBoolConverter}}">
+                                        <CheckBox
+                                            x:Name="TaskCheckBox"
+                                            Grid.Column="0"
+                                            CheckedChanged="OnTaskCheckedChanged"
+                                            HorizontalOptions="Center"
+                                            IsChecked="{Binding IsCheckBoxChecked}"
+                                            Scale="1.5"
+                                            VerticalOptions="Center" />
 
                                         <Grid
-                                            Grid.Row="1"
-                                            ColumnDefinitions="* ,* ,*"
-                                            ColumnSpacing="4">
+                                            x:Name="TaskInfos"
+                                            Grid.Column="1"
+                                            RowDefinitions="*, Auto"
+                                            RowSpacing="16">
 
-                                            <Button
-                                                Grid.Column="0"
-                                                BackgroundColor="{StaticResource Primary}"
-                                                Clicked="OnEffortSelected"
-                                                CommandParameter="{x:Static enums:EffortLevel.Light}"
-                                                Text="Leve" />
-                                            <Button
-                                                Grid.Column="1"
-                                                BackgroundColor="{StaticResource Primary}"
-                                                Clicked="OnEffortSelected"
-                                                CommandParameter="{x:Static enums:EffortLevel.Medium}"
-                                                Text="Regular" />
-                                            <Button
-                                                Grid.Column="2"
-                                                BackgroundColor="{StaticResource Primary}"
-                                                Clicked="OnEffortSelected"
-                                                CommandParameter="{x:Static enums:EffortLevel.Heavy}"
-                                                Text="Pesado" />
+                                            <Label
+                                                Grid.Row="0"
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding Task.Title}"
+                                                TextColor="{StaticResource PrimaryDarkText}"
+                                                TextDecorations="None">
+                                                <Label.Triggers>
+
+                                                    <DataTrigger
+                                                        Binding="{Binding IsCompleted}"
+                                                        TargetType="Label"
+                                                        Value="True">
+
+                                                        <Setter Property="TextDecorations" Value="Strikethrough" />
+                                                        <Setter Property="TextColor" Value="Gray" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+
+                                            <HorizontalStackLayout Grid.Row="1" Spacing="16">
+                                                <Border
+                                                    Padding="8"
+                                                    Background="LightGrey"
+                                                    StrokeShape="RoundRectangle 4"
+                                                    StrokeThickness="1">
+                                                    <Label Text="{Binding Task.DueDate}" />
+                                                </Border>
+
+                                                <Border
+                                                    Padding="8"
+                                                    Background="LightYellow"
+                                                    StrokeShape="RoundRectangle 4"
+                                                    StrokeThickness="1">
+                                                    <Label Text="{Binding Task.Priority}" />
+                                                </Border>
+                                            </HorizontalStackLayout>
                                         </Grid>
                                     </Grid>
-                                </Border>
-                            </Grid>
-                        </Border>
+
+                                    <Border
+                                        x:Name="TaskBackBody"
+                                        Padding="16,8,16,16"
+                                        BackgroundColor="{StaticResource CardBackgroundColor}"
+                                        IsVisible="{Binding IsAwaitingFeedback}"
+                                        StrokeShape="RoundRectangle 8">
+
+                                        <Grid RowDefinitions="Auto , *" RowSpacing="8">
+
+                                            <HorizontalStackLayout Grid.Row="0" Spacing="8">
+                                                <ImageButton
+                                                    Grid.Row="0"
+                                                    Padding="4"
+                                                    Clicked="OnTaskBackClicked"
+                                                    Source="{material:Material Icon=ArrowBack,
+                                                                               IconColor={StaticResource Primary},
+                                                                               IconSize=24}" />
+                                                <Label
+                                                    Padding="4"
+                                                    FontAttributes="Bold"
+                                                    FontSize="16"
+                                                    Text="Selecione o esforço exigido"
+                                                    VerticalTextAlignment="Center" />
+                                            </HorizontalStackLayout>
+
+                                            <Grid
+                                                Grid.Row="1"
+                                                ColumnDefinitions="* ,* ,*"
+                                                ColumnSpacing="4">
+
+                                                <Button
+                                                    Grid.Column="0"
+                                                    BackgroundColor="{StaticResource Primary}"
+                                                    Clicked="OnEffortSelected"
+                                                    CommandParameter="{x:Static enums:EffortLevel.Light}"
+                                                    Text="Leve" />
+                                                <Button
+                                                    Grid.Column="1"
+                                                    BackgroundColor="{StaticResource Primary}"
+                                                    Clicked="OnEffortSelected"
+                                                    CommandParameter="{x:Static enums:EffortLevel.Medium}"
+                                                    Text="Regular" />
+                                                <Button
+                                                    Grid.Column="2"
+                                                    BackgroundColor="{StaticResource Primary}"
+                                                    Clicked="OnEffortSelected"
+                                                    CommandParameter="{x:Static enums:EffortLevel.Heavy}"
+                                                    Text="Pesado" />
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

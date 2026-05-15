@@ -33,10 +33,21 @@ namespace UDayCore.ViewModels
                 TaskItems.Add(new TaskItemWrapper(item));
         }
 
+
         [RelayCommand]
         private async Task OpenCreateTaskPageAsync()
         {
             await Shell.Current.GoToAsync(nameof(CreateTaskPage));
+        }
+
+        [RelayCommand]
+        private async Task DeleteTaskItemAsync(TaskItemWrapper taskItemWrapper)
+        {
+            if (taskItemWrapper == null)
+                return;
+
+            await _taskItemService.DeleteTaskItemAsync(taskItemWrapper.Task);
+            TaskItems.Remove(taskItemWrapper);
         }
     }
 }
