@@ -159,7 +159,7 @@
                                                 HeightRequest="32"
                                                 HorizontalOptions="Center"
                                                 Source="{material:Material Icon=DeleteForever,
-                                                                       IconColor=White}"
+                                                                           IconColor=White}"
                                                 VerticalOptions="Center"
                                                 WidthRequest="32" />
                                         </Border>
@@ -225,7 +225,7 @@
                                             </Label>
 
                                             <HorizontalStackLayout Grid.Row="1" Spacing="16">
-                                                <Border
+                                                <!--<Border
                                                     Padding="8"
                                                     Background="LightGrey"
                                                     StrokeShape="RoundRectangle 4"
@@ -239,6 +239,50 @@
                                                     StrokeShape="RoundRectangle 4"
                                                     StrokeThickness="1">
                                                     <Label Text="{Binding Task.Priority}" />
+                                                </Border>-->
+
+                                                <Border
+                                                    Padding="6,4"
+                                                    BackgroundColor="#F3F4F6"
+                                                    StrokeShape="RoundRectangle 4"
+                                                    StrokeThickness="0">
+                                                    <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                                                        <Image HeightRequest="14" Source="{material:Material Icon=Schedule, IconColor=#6B7280}" />
+                                                        <Label
+                                                            FontSize="12"
+                                                            Text="{Binding }"
+                                                            TextColor="#6B7280" />
+                                                    </HorizontalStackLayout>
+                                                </Border>
+
+                                                <Border
+                                                    Padding="6,4"
+                                                    BackgroundColor="#FEE2E2"
+                                                    StrokeShape="RoundRectangle 4"
+                                                    StrokeThickness="0">
+                                                    <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                                                        <Image HeightRequest="14" Source="{material:Material Icon=Flag, IconColor=#EF4444}" />
+                                                        <Label
+                                                            FontAttributes="Bold"
+                                                            FontSize="12"
+                                                            Text="{Binding Task.Priority}"
+                                                            TextColor="#EF4444" />
+                                                    </HorizontalStackLayout>
+                                                </Border>
+
+                                                <Border
+                                                    Padding="6,4"
+                                                    BackgroundColor="#F3E8FF"
+                                                    StrokeShape="RoundRectangle 4"
+                                                    StrokeThickness="0">
+                                                    <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                                                        <Image HeightRequest="14" Source="{material:Material Icon=Bolt, IconColor=#9333EA}" />
+                                                        <Label
+                                                            FontAttributes="Bold"
+                                                            FontSize="12"
+                                                            Text="{Binding Task.Effort}"
+                                                            TextColor="#9333EA" />
+                                                    </HorizontalStackLayout>
                                                 </Border>
                                             </HorizontalStackLayout>
                                         </Grid>
