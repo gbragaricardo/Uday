@@ -16,6 +16,9 @@ namespace UDayCore.ViewModels
     {
         private readonly TaskItemService _taskItemService;
         public ObservableCollection<TaskItemWrapper> TaskItems { get; set; } = [];
+        [ObservableProperty] public partial double ProgressRatio { get; set; }
+        [ObservableProperty] public partial double ProgressPercentage { get; set; }
+        [ObservableProperty] public partial string ProgressText { get; set; }
 
         public HomeViewModel(TaskItemService taskItemService)
         {
@@ -31,6 +34,8 @@ namespace UDayCore.ViewModels
 
             foreach (var item in dbTaskItems)
                 TaskItems.Add(new TaskItemWrapper(item));
+
+            UpdateProgress();
         }
 
 
@@ -48,6 +53,32 @@ namespace UDayCore.ViewModels
 
             await _taskItemService.DeleteTaskItemAsync(taskItemWrapper.Task);
             TaskItems.Remove(taskItemWrapper);
+            UpdateProgress();
+        }
+
+        public void UpdateProgress()
+        {
+            if (TaskItems == null || !TaskItems.Any())
+            {
+                ProgressRatio = 0;
+                ProgressText = "0 de 0 tarefas concluídas";
+                return;
+            }
+
+            int total = TaskItems.Count;
+
+            int completed = TaskItems.Count(t => t.IsCompleted);
+
+            ProgressRatio = (double)completed / total;
+            ProgressPercentage = Math.Round(ProgressRatio * 100, 0);
+
+            ProgressText = $"{completed} de {total} tarefas concluídas";
+        }
+
+        public async Task RefreshTaskStateAsync(TaskItemWrapper wrapper)
+        {
+            // await _taskService.UpdateTaskItemAsync(wrapper.Task);
+            UpdateProgress();
         }
     }
 }

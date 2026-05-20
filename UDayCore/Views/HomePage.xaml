@@ -25,7 +25,7 @@
         RowDefinitions="Auto, *, Auto"
         VerticalOptions="Fill">
 
-        <Grid Margin="0,0,0,16" ColumnDefinitions="*, Auto">
+        <Grid Margin="0,0,0,8" ColumnDefinitions="*, Auto">
 
             <Label
                 Grid.Column="0"
@@ -74,11 +74,11 @@
             RowDefinitions="Auto, Auto, *"
             RowSpacing="16">
 
-            <VerticalStackLayout Grid.Row="0">
+            <VerticalStackLayout Grid.Row="0" Spacing="8">
                 <Label
                     FontAttributes="Bold"
                     FontSize="28"
-                    Text="Olá, Nome"
+                    Text="Olá, Ricardo"
                     TextColor="{StaticResource TextColor}" />
 
                 <Label FontSize="16" Text="Sua atividade hoje" />
@@ -107,30 +107,17 @@
                             VerticalOptions="Center" />
 
                         <Border Padding="8" StrokeShape="RoundRectangle 4">
-                            <Label Text="57%" VerticalOptions="Center" />
+                            <Label Text="{Binding ProgressPercentage, StringFormat='{0}%'}" VerticalOptions="Center" />
                         </Border>
                     </FlexLayout>
 
-                    <Label Grid.Row="1" Text="4 de 7 tarefas concluídas" />
+                    <Label Grid.Row="1" Text="{Binding ProgressText}" />
 
-                    <Grid
+                    <ProgressBar
                         Grid.Row="2"
-                        ColumnDefinitions="57*, 43*"
-                        HeightRequest="16">
-
-
-                        <Border
-                            Grid.ColumnSpan="2"
-                            BackgroundColor="{StaticResource Secondary}"
-                            StrokeShape="RoundRectangle 6"
-                            StrokeThickness="0" />
-
-                        <Border
-                            Grid.Column="0"
-                            BackgroundColor="{StaticResource Primary}"
-                            StrokeShape="RoundRectangle 6"
-                            StrokeThickness="0" />
-                    </Grid>
+                        Progress="{Binding ProgressRatio}"
+                        ProgressColor="{StaticResource Primary}"
+                        HeightRequest="8" />
 
                 </Grid>
             </Border>

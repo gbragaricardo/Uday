@@ -51,6 +51,10 @@ public partial class HomePage : ContentPage
             else
             {
                 wrapper.IsCompleted = false;
+
+                if (BindingContext is HomeViewModel vm)
+                    await vm.RefreshTaskStateAsync(wrapper);
+
                 wrapper.IsAwaitingFeedback = false;
             }
         }
@@ -95,6 +99,10 @@ public partial class HomePage : ContentPage
 
                 wrapper.IsAwaitingFeedback = false;
                 wrapper.IsCompleted = true;
+
+                if (BindingContext is HomeViewModel vm)
+                    await vm.RefreshTaskStateAsync(wrapper);
+                
 
                 await Task.WhenAll(
                     cardContainer.ScaleToAsync(1, 150, Easing.SpringOut),
