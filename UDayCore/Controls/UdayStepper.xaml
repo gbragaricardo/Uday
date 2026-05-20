@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UDayCore.Controls.UdayStepper"
-             x:Name="ThisStepper">
+<ContentView
+    x:Class="UDayCore.Controls.UdayStepper"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="ThisStepper">
 
-    <Border Stroke="{StaticResource LightTextColor}" 
-            StrokeThickness="1" 
-            StrokeShape="RoundRectangle 20" 
-            BackgroundColor="{StaticResource CardBackgroundColor}" 
-            HorizontalOptions="Start">
+    <Border
+        BackgroundColor="{StaticResource CardBackgroundColor}"
+        HorizontalOptions="Start"
+        Stroke="{StaticResource LightTextColor}"
+        StrokeShape="RoundRectangle 20"
+        StrokeThickness="1">
 
         <Grid ColumnDefinitions="64, 64">
 
-            <Button Grid.Column="0" 
-                    Text="-" 
-                    FontAttributes="Bold"
-                    FontSize="18"
-                    TextColor="{StaticResource Primary}" 
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center"
-                    Clicked="OnMinusClicked"/>
+            <Button
+                Grid.Column="0"
+                BackgroundColor="Transparent"
+                Clicked="OnMinusClicked"
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="-"
+                TextColor="{StaticResource Primary}"
+                VerticalOptions="Center" />
 
-            <Button Grid.Column="2" 
-                    Text="+" 
-                    FontAttributes="Bold"
-                    FontSize="18"
-                    TextColor="{StaticResource White}" 
-                    BackgroundColor="{StaticResource Primary}"
-                    CornerRadius="0"
-                    Clicked="OnPlusClicked"/>
+            <Button
+                Grid.Column="2"
+                BackgroundColor="{StaticResource Primary}"
+                Clicked="OnPlusClicked"
+                CornerRadius="0"
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="+"
+                TextColor="{StaticResource White}" />
 
         </Grid>
     </Border>

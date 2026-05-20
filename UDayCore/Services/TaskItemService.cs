@@ -18,17 +18,20 @@ namespace UDayCore.Services
         public async Task<IList<TaskItem>> GetTaskItemsAsync()
         {
             using var db = new UDayDbContext();
-            var taskItems = await db.TaskItems.AsNoTracking().ToListAsync();
+            var taskItems = await db.TaskItems.ToListAsync();
             
             return taskItems;
         }
         public async Task DeleteTaskItemAsync(TaskItem taskItem)
         {
             using var db = new UDayDbContext();
-            var taskItems = await db.TaskItems.ToListAsync();
-            taskItems.Remove(taskItem);
 
-            await db.SaveChangesAsync();
+            var entityToDelete = await db.TaskItems.FindAsync(taskItem.Id);
+            if (entityToDelete != null)
+            {
+                db.TaskItems.Remove(entityToDelete);
+                await db.SaveChangesAsync();
+            }
         }
     }
 }

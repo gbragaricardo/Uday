@@ -53,8 +53,11 @@ namespace UDayCore.ViewModels
                 Title = this.Title,
                 Description = this.Description ?? string.Empty,
                 EstimatedDurationMinutes = this.EstimatedDurationMinutes,
+                ScheduleType = SelectedScheduleType,
                 AvailableFrom = this.AvailableFrom ?? null,
                 DueDate = this.DueDate ?? null,
+                Priority = SelectedPriority,
+                EffortLevel = SelectedEffortLevel
 
             };
 

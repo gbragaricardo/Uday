@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UDayCore.Models.Entities;
+using UDayCore.Models.Enums;
 
 namespace UDayCore.ViewModels.Items
 {
@@ -19,25 +20,25 @@ namespace UDayCore.ViewModels.Items
             get
             {
                 // Aqui você avalia qual é a regra de tempo que a tarefa possui
-                switch (Task.TimeType)
+                switch (Task.ScheduleType)
                 {
-                    case TimeType.Timebox:
+                    case TaskScheduleType.TimeFrame:
                         // Exemplo: "14:00 - 15:30"
-                        return $"{Task.StartTime:hh\\:mm} - {Task.EndTime:hh\\:mm}";
+                        return $"{Task.AvailableFrom:hh\\:mm} - {Task.DueDate:hh\\:mm}";
 
-                    case TimeType.Timeframe:
-                        // Exemplo: "Manhã", "Tarde", "Noite"
-                        return Task.Period.ToString();
+                    case TaskScheduleType.TimeBox:
+                        // Exemplo: "14:00 - 15:30"
+                        return $"{Task.AvailableFrom:hh\\:mm} - {Task.DueDate:hh\\:mm}";
 
-                    case TimeType.SpecificDate:
-                        // Uma lógica bacana para datas específicas
-                        if (Task.DueDate.Date == DateTime.Today)
+                    case TaskScheduleType.SpecificDate:
+                        if (Task.DueDate == DateTime.Today)
                             return "Hoje";
-                        if (Task.DueDate.Date == DateTime.Today.AddDays(1))
-                            return "Amanhã";
+
+                        //if (Task.DueDate.Date == DateTime.Today.AddDays(1))
+                        //    return "Amanhã";
 
                         // Exemplo: "15 de Mai"
-                        return Task.DueDate.ToString("dd 'de' MMM");
+                        return $"{Task.DueDate:hh\\:mm}";
 
                     default:
                         return "Sem prazo";

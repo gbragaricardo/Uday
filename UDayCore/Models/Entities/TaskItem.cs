@@ -12,6 +12,8 @@ namespace UDayCore.Models.Entities
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public int EstimatedDurationMinutes { get; set; } = 15;
+        public TaskScheduleType ScheduleType { get; set; }
+
         public DateTime? AvailableFrom { get; set; }
         public DateTime? DueDate { get; set; }
         public EffortLevel EffortLevel { get; set; } = EffortLevel.Medium;

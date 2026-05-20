@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+
+namespace UDayCore.Converters
+{
+    public class EnumToColorConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            if (value == null) return Colors.Gray;
+
+            string enumType = value.GetType().Name;
+
+            string enumValue = value.ToString();
+
+            string suffix = parameter?.ToString() ?? "Bg";
+
+            string resourceKey = $"{enumType}_{enumValue}_{suffix}";
+
+            if (Application.Current != null &&
+                Application.Current.Resources.TryGetValue(resourceKey, out var colorValue) &&
+                colorValue is Color finalColor)
+            {
+                return finalColor;
+            }
+
+            return Colors.Gray;
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

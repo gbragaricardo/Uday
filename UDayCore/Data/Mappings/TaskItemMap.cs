@@ -38,12 +38,10 @@ namespace UDayCore.Data.Mappings
 
             builder.Property(t => t.Priority)
                    .HasConversion<string>()
-                   .HasDefaultValue(PriorityLevel.Medium)
                    .IsRequired();
 
             builder.Property(t => t.EffortLevel)
                    .HasConversion<string>()
-                   .HasDefaultValue(EffortLevel.Medium)
                    .IsRequired();
 
             builder.Property(t => t.RecurrenceType)
