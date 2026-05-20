@@ -7,9 +7,11 @@
     xmlns:entities="clr-namespace:UDayCore.Models.Entities"
     xmlns:enums="clr-namespace:UDayCore.Models.Enums"
     xmlns:material="clr-namespace:MauiIcons.Material;assembly=MauiIcons.Material"
+    xmlns:models="clr-namespace:UDayCore.Models"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModelItems="clr-namespace:UDayCore.ViewModels.Items"
     xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
+    xmlns:common="clr-namespace:UDayCore.Models.Common"
     Title="HomePage"
     x:DataType="viewModels:HomeViewModel"
     NavigationPage.HasNavigationBar="False"
@@ -115,14 +117,35 @@
 
                     <ProgressBar
                         Grid.Row="2"
+                        HeightRequest="8"
                         Progress="{Binding ProgressRatio}"
-                        ProgressColor="{StaticResource Primary}"
-                        HeightRequest="8" />
+                        ProgressColor="{StaticResource Primary}" />
 
                 </Grid>
             </Border>
 
-            <CollectionView Grid.Row="2" ItemsSource="{Binding TaskItems}">
+            <CollectionView
+                Grid.Row="2"
+                IsGrouped="True"
+                ItemsSource="{Binding GroupedTasks}"
+                SelectionMode="None">
+
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate x:DataType="common:TaskItemGroup">
+                        <VerticalStackLayout Margin="0,16,0,8">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="{Binding Title}"
+                                TextColor="{StaticResource Primary}" />
+
+                            <BoxView
+                                Margin="0,4,0,0"
+                                HeightRequest="1"
+                                Color="#E5E7EB" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
 
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="16" Orientation="Vertical" />

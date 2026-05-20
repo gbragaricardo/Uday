@@ -14,6 +14,7 @@ namespace UDayCore.ViewModels.Items
         [ObservableProperty] public partial bool IsAwaitingFeedback { get; set; }
         [ObservableProperty] public partial bool IsCheckBoxChecked { get; set; }
         [ObservableProperty] public partial bool IsCompleted { get; set; }
+        [ObservableProperty] public partial DayPeriod DayPeriod { get; set; }
 
         public string DisplayTime
         {
@@ -49,6 +50,17 @@ namespace UDayCore.ViewModels.Items
         public TaskItemWrapper(TaskItem task)
         {
             Task = task;
+
+            switch (task.EffortLevel)
+            {
+                case EffortLevel.Light: DayPeriod = DayPeriod.Morning; break;
+
+                case EffortLevel.Medium: DayPeriod = DayPeriod.Afternoon; break;
+
+                case EffortLevel.Heavy: DayPeriod = DayPeriod.Evening; break;
+
+                default: DayPeriod = DayPeriod.None; break;
+            }
         }
     }
 }

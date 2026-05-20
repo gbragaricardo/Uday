@@ -105,7 +105,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\Common\" />
 	  <Folder Include="Models\Interfaces\" />
 	  <Folder Include="Models\ValueObjects\" />
 	</ItemGroup>
