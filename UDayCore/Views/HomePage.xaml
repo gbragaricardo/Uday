@@ -80,7 +80,7 @@
                 <Label
                     FontAttributes="Bold"
                     FontSize="28"
-                    Text="Olá, Ricardo"
+                    Text="{Binding UserName, StringFormat='Olá, {0}'}"
                     TextColor="{StaticResource TextColor}" />
 
                 <Label FontSize="16" Text="Sua atividade hoje" />

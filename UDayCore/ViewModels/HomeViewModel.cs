@@ -16,6 +16,7 @@ namespace UDayCore.ViewModels
     public partial class HomeViewModel : ObservableObject
     {
         private readonly TaskItemService _taskItemService;
+        public string UserName => Preferences.Default.Get("UserName", "Pingo Fogo");
         public ObservableCollection<TaskItemGroup> GroupedTasks { get; set; } = new();
         [ObservableProperty] public partial double ProgressRatio { get; set; }
         [ObservableProperty] public partial double ProgressPercentage { get; set; }

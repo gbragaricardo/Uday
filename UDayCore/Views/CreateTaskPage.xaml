@@ -4,22 +4,24 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:UDayCore.Controls"
+    xmlns:converters="clr-namespace:UDayCore.Converters"
     xmlns:enums="clr-namespace:UDayCore.Models.Enums"
     xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
-    x:DataType="viewModels:CreateTaskViewModel"
-    Title="Create TaskPage">
+    Title="Create TaskPage"
+    x:DataType="viewModels:CreateTaskViewModel">
 
-    <ScrollView
-        Padding="16">
-        <Grid
-            RowDefinitions="*, Auto">
+    <ContentPage.Resources>
+        <converters:EnumTranslationConverter x:Key="EnumTranslator" />
+    </ContentPage.Resources>
+
+    <ScrollView Padding="16">
+        <Grid RowDefinitions="*, Auto">
             <VerticalStackLayout
                 Grid.Row="0"
-                Spacing="16"
-                Padding="0, 16">
+                Padding="0,16"
+                Spacing="16">
 
-                <VerticalStackLayout
-                    Spacing="4">
+                <VerticalStackLayout Spacing="4">
 
                     <Label
                         FontAttributes="Bold"
@@ -37,13 +39,12 @@
                             MaxLength="60"
                             Placeholder="Título"
                             PlaceholderColor="{StaticResource LightTextColor}"
-                            TextColor="{StaticResource PrimaryDarkText}"
-                            Text="{Binding Title, Mode=TwoWay}"/>
+                            Text="{Binding Title, Mode=TwoWay}"
+                            TextColor="{StaticResource PrimaryDarkText}" />
                     </Border>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Spacing="4">
+                <VerticalStackLayout Spacing="4">
 
                     <Label
                         FontAttributes="Bold"
@@ -62,22 +63,19 @@
                             MaxLength="450"
                             Placeholder="Descrição (opcional)"
                             PlaceholderColor="{StaticResource LightTextColor}"
-                            TextColor="{StaticResource PrimaryDarkText}"
-                            Text="{Binding Description, Mode=TwoWay}" />
+                            Text="{Binding Description, Mode=TwoWay}"
+                            TextColor="{StaticResource PrimaryDarkText}" />
                     </Border>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    BackgroundColor="{StaticResource CardBackgroundColor}"
-                    Spacing="4">
+                <VerticalStackLayout BackgroundColor="{StaticResource CardBackgroundColor}" Spacing="4">
 
                     <Label
                         FontAttributes="Bold"
                         Text="Duração estimada:"
                         TextColor="{StaticResource TextColor}" />
 
-                    <HorizontalStackLayout
-                        Spacing="16">
+                    <HorizontalStackLayout Spacing="16">
 
                         <Border
                             Padding="24,0"
@@ -105,8 +103,7 @@
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    Spacing="4">
+                <VerticalStackLayout Spacing="4">
 
                     <Label
                         FontAttributes="Bold"
@@ -121,6 +118,7 @@
 
                         <Picker
                             Title="Quando?"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumTranslator}}"
                             ItemsSource="{Binding ScheduleOptions}"
                             SelectedItem="{Binding SelectedScheduleType}" />
                     </Border>
@@ -145,31 +143,29 @@
                             Grid.Column="0"
                             Content="Diário"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{x:Static enums:RecurrenceType.Daily}" />
+                            Value="{Binding Source={x:Static enums:RecurrenceType.Daily}, Converter={StaticResource EnumTranslator}}" />
 
                         <RadioButton
                             Grid.Column="1"
                             Content="Semanal"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{x:Static enums:RecurrenceType.Weekly}" />
+                            Value="{Binding Source={x:Static enums:RecurrenceType.Weekly}, Converter={StaticResource EnumTranslator}}" />
 
                         <RadioButton
                             Grid.Column="2"
                             Content="Mensal"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{x:Static enums:RecurrenceType.Monthly}" />
+                            Value="{Binding Source={x:Static enums:RecurrenceType.Monthly}, Converter={StaticResource EnumTranslator}}" />
 
                         <RadioButton
                             Grid.Column="3"
                             Content="Anual"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{x:Static enums:RecurrenceType.Yearly}" />
+                            Value="{Binding Source={x:Static enums:RecurrenceType.Yearly}, Converter={StaticResource EnumTranslator}}" />
                     </Grid>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    IsVisible="{Binding IsSingleDateVisible}"
-                    Spacing="5">
+                <VerticalStackLayout IsVisible="{Binding IsSingleDateVisible}" Spacing="5">
 
                     <Label
                         Margin="5,0,0,0"
@@ -184,9 +180,7 @@
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="1">
 
-                        <DatePicker
-                            Date="{Binding DueDate}"
-                            TextColor="{StaticResource PrimaryDarkText}" />
+                        <DatePicker Date="{Binding DueDate}" TextColor="{StaticResource PrimaryDarkText}" />
                     </Border>
                 </VerticalStackLayout>
 
@@ -196,9 +190,7 @@
                     ColumnSpacing="15"
                     IsVisible="{Binding IsTimeframeVisible}">
 
-                    <VerticalStackLayout
-                        Grid.Column="0"
-                        Spacing="5">
+                    <VerticalStackLayout Grid.Column="0" Spacing="5">
 
                         <Label
                             Margin="5,0,0,0"
@@ -213,15 +205,11 @@
                             StrokeShape="RoundRectangle 10"
                             StrokeThickness="1">
 
-                            <DatePicker
-                                Date="{Binding AvailableFrom}"
-                                TextColor="{StaticResource PrimaryDarkText}" />
+                            <DatePicker Date="{Binding AvailableFrom}" TextColor="{StaticResource PrimaryDarkText}" />
                         </Border>
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout
-                        Grid.Column="1"
-                        Spacing="5">
+                    <VerticalStackLayout Grid.Column="1" Spacing="5">
 
                         <Label
                             Margin="5,0,0,0"
@@ -236,16 +224,12 @@
                             StrokeShape="RoundRectangle 10"
                             StrokeThickness="1">
 
-                            <DatePicker
-                                Date="{Binding DueDate}"
-                                TextColor="{StaticResource PrimaryDarkText}" />
+                            <DatePicker Date="{Binding DueDate}" TextColor="{StaticResource PrimaryDarkText}" />
                         </Border>
                     </VerticalStackLayout>
                 </Grid>
 
-                <VerticalStackLayout
-                    IsVisible="{Binding IsTimeBoxVisible}"
-                    Spacing="4">
+                <VerticalStackLayout IsVisible="{Binding IsTimeBoxVisible}" Spacing="4">
                     <Label
                         FontAttributes="Bold"
                         Text="Período"
@@ -260,9 +244,10 @@
 
                         <Picker
                             Title="Selecione o período"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumTranslator}}"
                             ItemsSource="{Binding TimeBoxOptions}"
                             SelectedItem="{Binding SelectedTimeBox}"
-                            TextColor="{StaticResource PrimaryDarkText}"/>
+                            TextColor="{StaticResource PrimaryDarkText}" />
                     </Border>
                 </VerticalStackLayout>
 
@@ -276,26 +261,24 @@
                         Text="Nível de Esforço"
                         TextColor="{StaticResource TextColor}" />
 
-                    <Grid
-                        ColumnDefinitions="*, *, *"
-                        ColumnSpacing="10">
+                    <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10">
                         <RadioButton
                             Grid.Column="0"
                             Content="Leve"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{x:Static enums:EffortLevel.Light}" />
+                            Value="{Binding Source={x:Static enums:EffortLevel.Light}, Converter={StaticResource EnumTranslator}}" />
 
                         <RadioButton
                             Grid.Column="1"
                             Content="Médio"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{x:Static enums:EffortLevel.Medium}" />
+                            Value="{Binding Source={x:Static enums:EffortLevel.Medium}, Converter={StaticResource EnumTranslator}}" />
 
                         <RadioButton
                             Grid.Column="2"
                             Content="Pesado"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{x:Static enums:EffortLevel.Heavy}" />
+                            Value="{Binding Source={x:Static enums:EffortLevel.Heavy}, Converter={StaticResource EnumTranslator}}" />
                     </Grid>
                 </VerticalStackLayout>
 
@@ -309,34 +292,32 @@
                         Text="Prioridade"
                         TextColor="{StaticResource TextColor}" />
 
-                    <Grid
-                        ColumnDefinitions="*, *, *"
-                        ColumnSpacing="8">
+                    <Grid ColumnDefinitions="*, *, *" ColumnSpacing="8">
 
                         <RadioButton
                             Content="Baixa"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{x:Static enums:PriorityLevel.Low}" />
+                            Value="{Binding Source={x:Static enums:PriorityLevel.Low}, Converter={StaticResource EnumTranslator}}" />
 
                         <RadioButton
                             Grid.Column="1"
                             Content="Média"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{x:Static enums:PriorityLevel.Medium}" />
+                            Value="{Binding Source={x:Static enums:PriorityLevel.Medium}, Converter={StaticResource EnumTranslator}}" />
 
                         <RadioButton
                             Grid.Column="2"
                             Content="Alta"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{x:Static enums:PriorityLevel.High}" />
+                            Value="{Binding Source={x:Static enums:PriorityLevel.High}, Converter={StaticResource EnumTranslator}}" />
                     </Grid>
                 </VerticalStackLayout>
             </VerticalStackLayout>
 
             <Button
                 Grid.Row="1"
-                Text="Criar Tarefa"
-                Command="{Binding CreateTaskItemCommand}"/>
+                Command="{Binding CreateTaskItemCommand}"
+                Text="Criar Tarefa" />
         </Grid>
     </ScrollView>
 </ContentPage>

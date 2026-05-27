@@ -4,12 +4,18 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
+    xmlns:converters="clr-namespace:UDayCore.Converters"
     BackgroundColor="#F9FAFB"
     Shell.NavBarIsVisible="False">
     <ContentPage.BindingContext>
         <viewModels:OnboardingViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <converters:EnumTranslationConverter
+            x:Key="EnumTranslator" />
+    </ContentPage.Resources>
+    
     <ScrollView>
         <VerticalStackLayout Padding="24" Spacing="24">
             <VerticalStackLayout Margin="0,20,0,10" Spacing="8">
@@ -59,8 +65,9 @@
                             <Picker
                                 Title="Selecione o turno"
                                 BackgroundColor="#F3F4F6"
-                                ItemsSource="{Binding Shifts}"
-                                SelectedItem="{Binding PreferredShift}"
+                                ItemsSource="{Binding Periods}"
+                                SelectedItem="{Binding SelectedPeriod}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumTranslator}}"
                                 TextColor="#111827" />
                         </Border>
                     </VerticalStackLayout>
@@ -85,7 +92,8 @@
                             <Picker
                                 BackgroundColor="#F3F4F6"
                                 ItemsSource="{Binding SortOptions}"
-                                SelectedItem="{Binding DefaultSort}"
+                                SelectedItem="{Binding SelectedSort}"
+                                ItemDisplayBinding="{Binding ., Converter={StaticResource EnumTranslator}}"
                                 TextColor="#111827" />
                         </Border>
                     </VerticalStackLayout>
@@ -122,8 +130,9 @@
                     <Border Padding="16,0" StrokeShape="RoundRectangle 8">
                         <Picker
                             BackgroundColor="#F3F4F6"
-                            ItemsSource="{Binding ThemeOptions}"
-                            SelectedItem="{Binding AppTheme}"
+                            ItemsSource="{Binding Themes}"
+                            SelectedItem="{Binding SelectedTheme}"
+                            ItemDisplayBinding="{Binding ., Converter={StaticResource EnumTranslator}}"
                             TextColor="#111827" />
                     </Border>
                 </VerticalStackLayout>

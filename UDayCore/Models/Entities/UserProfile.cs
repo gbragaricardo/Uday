@@ -11,7 +11,7 @@ namespace UDayCore.Models.Entities
         public string Name { get; set; } = string.Empty;
         public TimeOnly WakeUpTime { get; set; }
         public TimeOnly SleepTime { get; set; }
-        public EnergyPeriod PreferredEnergyPeriod { get; set; }
+        public DayPeriod PreferredDayPeriod { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public List<string> ActiveTimeSlotIds { get; set; } = [];
     }
