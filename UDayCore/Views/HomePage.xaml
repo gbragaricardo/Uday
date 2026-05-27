@@ -3,6 +3,7 @@
     x:Class="UDayCore.Views.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common="clr-namespace:UDayCore.Models.Common"
     xmlns:converters="clr-namespace:UDayCore.Converters"
     xmlns:entities="clr-namespace:UDayCore.Models.Entities"
     xmlns:enums="clr-namespace:UDayCore.Models.Enums"
@@ -11,7 +12,6 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModelItems="clr-namespace:UDayCore.ViewModels.Items"
     xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
-    xmlns:common="clr-namespace:UDayCore.Models.Common"
     Title="HomePage"
     x:DataType="viewModels:HomeViewModel"
     NavigationPage.HasNavigationBar="False"
@@ -20,6 +20,7 @@
     <ContentPage.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         <converters:EnumToColorConverter x:Key="EnumToColorConverter" />
+        <converters:EnumTranslationConverter x:Key="EnumTranslator" />
     </ContentPage.Resources>
 
     <Grid
@@ -286,7 +287,7 @@
                                                                         <Span
                                                                             FontAttributes="Bold"
                                                                             FontSize="12"
-                                                                            Text="{Binding Task.Priority, Mode=TwoWay}"
+                                                                            Text="{Binding Task.Priority,Converter={StaticResource EnumTranslator}}"
                                                                             TextColor="{Binding Task.Priority, Converter={StaticResource EnumToColorConverter}, ConverterParameter='Text'}" />
                                                                     </FormattedString>
                                                                 </Label.FormattedText>
@@ -301,7 +302,6 @@
                                                         StrokeShape="RoundRectangle 6"
                                                         StrokeThickness="0">
                                                         <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
-                                                            <Image HeightRequest="14" Source="{material:Material Icon=Bolt, IconColor=#9333EA}" />
                                                             <Label VerticalOptions="Center">
                                                                 <Label.FormattedText>
                                                                     <FormattedString>
@@ -312,7 +312,7 @@
                                                                         <Span
                                                                             FontAttributes="Bold"
                                                                             FontSize="12"
-                                                                            Text="{Binding Task.EffortLevel, Mode=TwoWay}"
+                                                                            Text="{Binding Task.EffortLevel, Converter={StaticResource EnumTranslator}}"
                                                                             TextColor="{Binding Task.EffortLevel, Converter={StaticResource EnumToColorConverter}, ConverterParameter='Text'}" />
                                                                     </FormattedString>
                                                                 </Label.FormattedText>

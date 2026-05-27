@@ -104,7 +104,7 @@
                         VerticalOptions="Center">
                         <Label
                             FontAttributes="Bold"
-                            Text="Gerenciar tarefas aos finais de semana?"
+                            Text="Tarefas aos finais de semana?"
                             TextColor="#374151"
                             VerticalOptions="Center" />
                         
