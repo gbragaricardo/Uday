@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using UDayCore.Views;
 
 namespace UDayCore
 {
@@ -11,7 +12,13 @@ namespace UDayCore
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            Preferences.Default.Set("IsFirstRun", true);
+
+            bool isFirstRun = Preferences.Default.Get("IsFirstRun", true);
+
+            Page initialPage = isFirstRun ? new OnboardingPage() : new AppShell();
+
+            return new Window(initialPage);
         }
     }
 }

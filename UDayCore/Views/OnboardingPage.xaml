@@ -1,12 +1,145 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UDayCore.Views.OnboardingPage"
-             Title="OnboardingPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="UDayCore.Views.OnboardingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
+    BackgroundColor="#F9FAFB"
+    Shell.NavBarIsVisible="False">
+    <ContentPage.BindingContext>
+        <viewModels:OnboardingViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="24">
+            <VerticalStackLayout Margin="0,20,0,10" Spacing="8">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="28"
+                    Text="Bem-vindo ao UDay"
+                    TextColor="#111827" />
+                <Label
+                    FontSize="16"
+                    Text="Vamos personalizar o seu ambiente para máxima produtividade."
+                    TextColor="#6B7280" />
+            </VerticalStackLayout>
+
+            <Border
+                Padding="16"
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeShape="RoundRectangle 12"
+                StrokeThickness="1">
+
+                <VerticalStackLayout Spacing="16">
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            Text="Como podemos te chamar?"
+                            TextColor="#374151" />
+
+                        <Border Padding="16,0" StrokeShape="RoundRectangle 8">
+                            <Entry
+                                BackgroundColor="#F3F4F6"
+                                Placeholder="Ex: Pingo Fogo"
+                                Text="{Binding UserName}"
+                                TextColor="#111827" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            Text="Seu turno mais produtivo:"
+                            TextColor="#374151" />
+
+                        <Border Padding="16,0" StrokeShape="RoundRectangle 8">
+                            <Picker
+                                Title="Selecione o turno"
+                                BackgroundColor="#F3F4F6"
+                                ItemsSource="{Binding Shifts}"
+                                SelectedItem="{Binding PreferredShift}"
+                                TextColor="#111827" />
+                        </Border>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border
+                Padding="16"
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeShape="RoundRectangle 12"
+                StrokeThickness="1">
+                <VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            Text="Ordenar tarefas primeiro por:"
+                            TextColor="#374151" />
+                        <Border Padding="16,0" StrokeShape="RoundRectangle 8">
+
+                            <Picker
+                                BackgroundColor="#F3F4F6"
+                                ItemsSource="{Binding SortOptions}"
+                                SelectedItem="{Binding DefaultSort}"
+                                TextColor="#111827" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <HorizontalStackLayout
+                        Margin="0,8,0,0"
+                        Spacing="12"
+                        VerticalOptions="Center">
+                        <Label
+                            FontAttributes="Bold"
+                            Text="Gerenciar tarefas aos finais de semana?"
+                            TextColor="#374151"
+                            VerticalOptions="Center" />
+                        
+                        <Switch IsToggled="{Binding ManageWeekends}" OnColor="{StaticResource Primary}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border
+                Padding="16"
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeShape="RoundRectangle 12"
+                StrokeThickness="1">
+
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        Margin="0,8,0,0"
+                        FontAttributes="Bold"
+                        Text="Tema Visual:"
+                        TextColor="#374151" />
+                    
+                    <Border Padding="16,0" StrokeShape="RoundRectangle 8">
+                        <Picker
+                            BackgroundColor="#F3F4F6"
+                            ItemsSource="{Binding ThemeOptions}"
+                            SelectedItem="{Binding AppTheme}"
+                            TextColor="#111827" />
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Margin="0,8,0,32"
+                BackgroundColor="{StaticResource Primary}"
+                Command="{Binding FinishOnboardingCommand}"
+                CornerRadius="8"
+                FontAttributes="Bold"
+                FontSize="16"
+                HeightRequest="54"
+                Text="Tudo Pronto! Começar"
+                TextColor="White" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
