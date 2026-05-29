@@ -20,7 +20,7 @@ namespace UDayCore.ViewModels
         [ObservableProperty] public partial bool ManageWeekends { get; set; } = false;
 
         public IReadOnlyList<AppTheme> Themes { get; } = Enum.GetValues<AppTheme>();
-        [ObservableProperty] public partial AppTheme SelectedTheme { get; set; } = AppTheme.Light;
+        [ObservableProperty] public partial AppTheme SelectedTheme { get; set; } = AppTheme.Unspecified;
 
         partial void OnSelectedThemeChanged(AppTheme value)
         {
