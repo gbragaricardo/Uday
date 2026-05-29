@@ -53,29 +53,9 @@ namespace UDayCore.ViewModels
 
             if (SelectedScheduleType == TaskScheduleType.TimeBox)
             {
-                var today = DateTime.Today;
-                switch (SelectedTimeBox)
-                {
-                    case TimeBoxType.ThisWeek:
-                        // Início da semana atual (assumindo Segunda como primeiro dia)
-                        int diff = (7 + (today.DayOfWeek - DayOfWeek.Monday)) % 7;
-                        availableFrom = today.AddDays(-1 * diff);
-                        dueDate = availableFrom.Value.AddDays(6);
-                        break;
-                    case TimeBoxType.NextWeek:
-                        int nextDiff = (7 + (today.DayOfWeek - DayOfWeek.Monday)) % 7;
-                        availableFrom = today.AddDays(-1 * nextDiff + 7);
-                        dueDate = availableFrom.Value.AddDays(6);
-                        break;
-                    case TimeBoxType.ThisMonth:
-                        availableFrom = new DateTime(today.Year, today.Month, 1);
-                        dueDate = availableFrom.Value.AddMonths(1).AddDays(-1);
-                        break;
-                    case TimeBoxType.NextMonth:
-                        availableFrom = new DateTime(today.Year, today.Month, 1).AddMonths(1);
-                        dueDate = availableFrom.Value.AddMonths(1).AddDays(-1);
-                        break;
-                }
+                var range = CalculateTimeBoxRange(SelectedTimeBox);
+                availableFrom = range.AvailableFrom;
+                dueDate = range.DueDate;
             }
 
             TaskItem newTask = new TaskItem
@@ -94,6 +74,41 @@ namespace UDayCore.ViewModels
             await _taskItemService.SaveTaskItemAsync(newTask);
 
             await Shell.Current.GoToAsync("//HomePage");
+        }
+
+        private (DateTime AvailableFrom, DateTime DueDate) CalculateTimeBoxRange(TimeBoxType timeBoxType)
+        {
+            var today = DateTime.Today;
+            DateTime availableFrom;
+            DateTime dueDate;
+
+            switch (timeBoxType)
+            {
+                case TimeBoxType.ThisWeek:
+                    int diff = (7 + (today.DayOfWeek - DayOfWeek.Monday)) % 7;
+                    availableFrom = today.AddDays(-1 * diff);
+                    dueDate = availableFrom.AddDays(6);
+                    break;
+                case TimeBoxType.NextWeek:
+                    int nextDiff = (7 + (today.DayOfWeek - DayOfWeek.Monday)) % 7;
+                    availableFrom = today.AddDays(-1 * nextDiff + 7);
+                    dueDate = availableFrom.AddDays(6);
+                    break;
+                case TimeBoxType.ThisMonth:
+                    availableFrom = new DateTime(today.Year, today.Month, 1);
+                    dueDate = availableFrom.AddMonths(1).AddDays(-1);
+                    break;
+                case TimeBoxType.NextMonth:
+                    availableFrom = new DateTime(today.Year, today.Month, 1).AddMonths(1);
+                    dueDate = availableFrom.AddMonths(1).AddDays(-1);
+                    break;
+                default:
+                    availableFrom = today;
+                    dueDate = today;
+                    break;
+            }
+
+            return (availableFrom, dueDate);
         }
     }
 }

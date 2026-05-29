@@ -24,9 +24,9 @@ namespace UDayCore.ViewModels.Items
                 {
                     case TaskScheduleType.TimeFrame:
                     case TaskScheduleType.TimeBox:
-                        // Exibe o intervalo de dias: "12/05 - 18/05"
+                        // Exibe o intervalo de dias: "12/05/26 - 18/05/26"
                         if (Task.AvailableFrom.HasValue && Task.DueDate.HasValue)
-                            return $"{Task.AvailableFrom:dd/MM} - {Task.DueDate:dd/MM}";
+                            return $"{Task.AvailableFrom:dd/MM/yy} - {Task.DueDate:dd/MM/yy}";
                         
                         return "Período indefinido";
 
@@ -42,8 +42,8 @@ namespace UDayCore.ViewModels.Items
                         if (date == today.AddDays(1))
                             return "Amanhã";
 
-                        // Para outras datas, mostra dd/MM
-                        return $"{Task.DueDate:dd/MM}";
+                        // Para outras datas, mostra dd/MM/yy
+                        return $"{Task.DueDate:dd/MM/yy}";
 
                     case TaskScheduleType.Recurring:
                         return Task.RecurrenceType switch
