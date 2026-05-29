@@ -58,8 +58,6 @@ namespace UDayCore.ViewModels.Items
                 case EffortLevel.Medium: DayPeriod = DayPeriod.Afternoon; break;
 
                 case EffortLevel.Heavy: DayPeriod = DayPeriod.Evening; break;
-
-                default: DayPeriod = DayPeriod.None; break;
             }
         }
     }

@@ -18,7 +18,7 @@ namespace UDayCore.Models.Entities
         public DateTime? DueDate { get; set; }
         public EffortLevel EffortLevel { get; set; } = EffortLevel.Medium;
         public PriorityLevel Priority { get; set; } = PriorityLevel.Medium;
-        public RecurrenceType RecurrenceType { get; set; } = RecurrenceType.None;
+        public RecurrenceType RecurrenceType { get; set; } = RecurrenceType.Weekly;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public bool IsCompleted { get; set; } = false;
     }

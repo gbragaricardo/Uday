@@ -7,8 +7,6 @@ namespace UDayCore.Models.Enums
 {
     public enum DayPeriod
     {
-        None = 0,
-
         [Description("Manhã")]
         Morning = 1,
 

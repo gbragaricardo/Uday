@@ -7,8 +7,6 @@ namespace UDayCore.Models.Enums
 {
     public enum TaskScheduleType
     {
-        None,
-
         [Description("Dia Específico")]
         SpecificDate,
 

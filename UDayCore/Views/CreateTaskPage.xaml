@@ -26,12 +26,15 @@
                     <Label
                         FontAttributes="Bold"
                         Text="Título"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                    Dark={StaticResource Gray100}}" />
 
                     <Border
                         Padding="4"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
-                        Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                          Dark={StaticResource CardBackgroundColorDark}}"
+                        Stroke="{AppThemeBinding Light={StaticResource Gray200},
+                                                 Dark={StaticResource Gray800}}"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="1">
 
@@ -39,9 +42,11 @@
                             BackgroundColor="Transparent"
                             MaxLength="60"
                             Placeholder="Título"
-                            PlaceholderColor="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource LightTextColorDark}}"
+                            PlaceholderColor="{AppThemeBinding Light={StaticResource LightTextColor},
+                                                               Dark={StaticResource LightTextColorDark}}"
                             Text="{Binding Title, Mode=TwoWay}"
-                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource PrimaryDarkTextDark}}" />
+                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
+                                                        Dark={StaticResource PrimaryDarkTextDark}}" />
                     </Border>
                 </VerticalStackLayout>
 
@@ -50,12 +55,15 @@
                     <Label
                         FontAttributes="Bold"
                         Text="Descrição"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                    Dark={StaticResource Gray100}}" />
 
                     <Border
                         Padding="4"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
-                        Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                          Dark={StaticResource CardBackgroundColorDark}}"
+                        Stroke="{AppThemeBinding Light={StaticResource Gray200},
+                                                 Dark={StaticResource Gray800}}"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="1">
 
@@ -64,9 +72,11 @@
                             BackgroundColor="Transparent"
                             MaxLength="450"
                             Placeholder="Descrição (opcional)"
-                            PlaceholderColor="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource LightTextColorDark}}"
+                            PlaceholderColor="{AppThemeBinding Light={StaticResource LightTextColor},
+                                                               Dark={StaticResource LightTextColorDark}}"
                             Text="{Binding Description, Mode=TwoWay}"
-                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource PrimaryDarkTextDark}}" />
+                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
+                                                        Dark={StaticResource PrimaryDarkTextDark}}" />
                     </Border>
                 </VerticalStackLayout>
 
@@ -75,15 +85,18 @@
                     <Label
                         FontAttributes="Bold"
                         Text="Duração estimada:"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                    Dark={StaticResource Gray100}}" />
 
                     <HorizontalStackLayout Spacing="16">
 
                         <Border
                             Padding="24,0"
-                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                              Dark={StaticResource CardBackgroundColorDark}}"
                             MinimumWidthRequest="156"
-                            Stroke="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource LightTextColorDark}}"
+                            Stroke="{AppThemeBinding Light={StaticResource LightTextColor},
+                                                     Dark={StaticResource LightTextColorDark}}"
                             StrokeShape="RoundRectangle 10"
                             StrokeThickness="1">
 
@@ -91,7 +104,8 @@
                                 FontSize="14"
                                 HorizontalOptions="Center"
                                 Text="{Binding EstimatedDurationMinutes, StringFormat='{0} minutos'}"
-                                TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource PrimaryDarkTextDark}}"
+                                TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
+                                                            Dark={StaticResource PrimaryDarkTextDark}}"
                                 VerticalOptions="Center" />
                         </Border>
 
@@ -110,12 +124,15 @@
                     <Label
                         FontAttributes="Bold"
                         Text="Tipo de prazo"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                    Dark={StaticResource Gray100}}" />
 
                     <Border
                         Padding="4,0"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
-                        Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                          Dark={StaticResource CardBackgroundColorDark}}"
+                        Stroke="{AppThemeBinding Light={StaticResource Gray200},
+                                                 Dark={StaticResource Gray800}}"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="1">
 
@@ -124,48 +141,48 @@
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumTranslator}}"
                             ItemsSource="{Binding ScheduleOptions}"
                             SelectedItem="{Binding SelectedScheduleType}"
-                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource PrimaryDarkTextDark}}" />
+                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
+                                                        Dark={StaticResource PrimaryDarkTextDark}}" />
                     </Border>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    IsVisible="{Binding IsRecurrenceVisisble, Mode=TwoWay}"
-                    RadioButtonGroup.GroupName="RecurrenceTypeGroup"
-                    RadioButtonGroup.SelectedValue="{Binding SelectedRecurrenceType, Mode=TwoWay}"
-                    Spacing="5">
+                <VerticalStackLayout IsVisible="{Binding IsRecurrenceVisisble, Mode=TwoWay}" Spacing="5">
 
                     <Label
                         FontAttributes="Bold"
                         Text="Periodo de recorrencia"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                    Dark={StaticResource Gray100}}" />
 
                     <Grid
                         Margin="0,5"
                         ColumnDefinitions="*, *, *, *"
-                        ColumnSpacing="10">
+                        ColumnSpacing="10"
+                        RadioButtonGroup.GroupName="RecurrenceTypeGroup"
+                        RadioButtonGroup.SelectedValue="{Binding SelectedRecurrenceType, Mode=TwoWay}">
                         <RadioButton
                             Grid.Column="0"
                             Content="Diário"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{Binding Source={x:Static enums:RecurrenceType.Daily}, Converter={StaticResource EnumTranslator}}" />
+                            Value="{x:Static enums:RecurrenceType.Daily}" />
 
                         <RadioButton
                             Grid.Column="1"
                             Content="Semanal"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{Binding Source={x:Static enums:RecurrenceType.Weekly}, Converter={StaticResource EnumTranslator}}" />
+                            Value="{x:Static enums:RecurrenceType.Weekly}" />
 
                         <RadioButton
                             Grid.Column="2"
                             Content="Mensal"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{Binding Source={x:Static enums:RecurrenceType.Monthly}, Converter={StaticResource EnumTranslator}}" />
+                            Value="{x:Static enums:RecurrenceType.Monthly}" />
 
                         <RadioButton
                             Grid.Column="3"
                             Content="Anual"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{Binding Source={x:Static enums:RecurrenceType.Yearly}, Converter={StaticResource EnumTranslator}}" />
+                            Value="{x:Static enums:RecurrenceType.Yearly}" />
                     </Grid>
                 </VerticalStackLayout>
 
@@ -175,12 +192,15 @@
                         Margin="5,0,0,0"
                         FontAttributes="Bold"
                         Text="Data da Tarefa"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                    Dark={StaticResource Gray100}}" />
 
                     <Border
                         Padding="8,0"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
-                        Stroke="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource LightTextColorDark}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                          Dark={StaticResource CardBackgroundColorDark}}"
+                        Stroke="{AppThemeBinding Light={StaticResource LightTextColor},
+                                                 Dark={StaticResource LightTextColorDark}}"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="1">
 
@@ -200,12 +220,15 @@
                             Margin="5,0,0,0"
                             FontAttributes="Bold"
                             Text="Início"
-                            TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                            TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                        Dark={StaticResource Gray100}}" />
 
                         <Border
                             Padding="10,0"
-                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
-                            Stroke="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource LightTextColorDark}}"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                              Dark={StaticResource CardBackgroundColorDark}}"
+                            Stroke="{AppThemeBinding Light={StaticResource LightTextColor},
+                                                     Dark={StaticResource LightTextColorDark}}"
                             StrokeShape="RoundRectangle 10"
                             StrokeThickness="1">
 
@@ -219,12 +242,15 @@
                             Margin="5,0,0,0"
                             FontAttributes="Bold"
                             Text="Prazo Final"
-                            TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                            TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                        Dark={StaticResource Gray100}}" />
 
                         <Border
                             Padding="10,0"
-                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
-                            Stroke="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource LightTextColorDark}}"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                              Dark={StaticResource CardBackgroundColorDark}}"
+                            Stroke="{AppThemeBinding Light={StaticResource LightTextColor},
+                                                     Dark={StaticResource LightTextColorDark}}"
                             StrokeShape="RoundRectangle 10"
                             StrokeThickness="1">
 
@@ -237,12 +263,15 @@
                     <Label
                         FontAttributes="Bold"
                         Text="Período"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                    Dark={StaticResource Gray100}}" />
 
                     <Border
                         Padding="4,0"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
-                        Stroke="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource LightTextColorDark}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                          Dark={StaticResource CardBackgroundColorDark}}"
+                        Stroke="{AppThemeBinding Light={StaticResource LightTextColor},
+                                                 Dark={StaticResource LightTextColorDark}}"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="1">
 
@@ -251,69 +280,75 @@
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumTranslator}}"
                             ItemsSource="{Binding TimeBoxOptions}"
                             SelectedItem="{Binding SelectedTimeBox}"
-                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource PrimaryDarkTextDark}}" />
+                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
+                                                        Dark={StaticResource PrimaryDarkTextDark}}" />
                     </Border>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    RadioButtonGroup.GroupName="EffortGroup"
-                    RadioButtonGroup.SelectedValue="{Binding SelectedEffortLevel, Mode=TwoWay}"
-                    Spacing="4">
+                <VerticalStackLayout Spacing="4">
 
                     <Label
                         FontAttributes="Bold"
                         Text="Nível de Esforço"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                    Dark={StaticResource Gray100}}" />
 
-                    <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10">
+                    <Grid
+                        ColumnDefinitions="*, *, *"
+                        ColumnSpacing="10"
+                        RadioButtonGroup.GroupName="EffortGroup"
+                        RadioButtonGroup.SelectedValue="{Binding SelectedEffortLevel, Mode=TwoWay}">
                         <RadioButton
                             Grid.Column="0"
                             Content="Leve"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{Binding Source={x:Static enums:EffortLevel.Light}, Converter={StaticResource EnumTranslator}}" />
+                            Value="{x:Static enums:EffortLevel.Light}" />
 
                         <RadioButton
                             Grid.Column="1"
                             Content="Médio"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{Binding Source={x:Static enums:EffortLevel.Medium}, Converter={StaticResource EnumTranslator}}" />
+                            Value="{x:Static enums:EffortLevel.Medium}" />
 
                         <RadioButton
                             Grid.Column="2"
                             Content="Pesado"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{Binding Source={x:Static enums:EffortLevel.Heavy}, Converter={StaticResource EnumTranslator}}" />
+                            Value="{x:Static enums:EffortLevel.Heavy}" />
                     </Grid>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout
-                    RadioButtonGroup.GroupName="PriorityGroup"
-                    RadioButtonGroup.SelectedValue="{Binding SelectedPriority, Mode=TwoWay}"
-                    Spacing="4">
+                <VerticalStackLayout Spacing="4">
+
 
                     <Label
                         FontAttributes="Bold"
                         Text="Prioridade"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                    Dark={StaticResource Gray100}}" />
 
-                    <Grid ColumnDefinitions="*, *, *" ColumnSpacing="8">
+                    <Grid
+                        ColumnDefinitions="*, *, *"
+                        ColumnSpacing="8"
+                        RadioButtonGroup.GroupName="PriorityGroup"
+                        RadioButtonGroup.SelectedValue="{Binding SelectedPriority, Mode=TwoWay}">
 
                         <RadioButton
                             Content="Baixa"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{Binding Source={x:Static enums:PriorityLevel.Low}, Converter={StaticResource EnumTranslator}}" />
+                            Value="{x:Static enums:PriorityLevel.Low}" />
 
                         <RadioButton
                             Grid.Column="1"
                             Content="Média"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{Binding Source={x:Static enums:PriorityLevel.Medium}, Converter={StaticResource EnumTranslator}}" />
+                            Value="{x:Static enums:PriorityLevel.Medium}" />
 
                         <RadioButton
                             Grid.Column="2"
                             Content="Alta"
                             Style="{StaticResource ModernChipStyle}"
-                            Value="{Binding Source={x:Static enums:PriorityLevel.High}, Converter={StaticResource EnumTranslator}}" />
+                            Value="{x:Static enums:PriorityLevel.High}" />
                     </Grid>
                 </VerticalStackLayout>
             </VerticalStackLayout>

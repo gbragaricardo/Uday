@@ -46,7 +46,7 @@ namespace UDayCore.Data.Mappings
 
             builder.Property(t => t.RecurrenceType)
                    .HasConversion<string>()
-                   .HasDefaultValue(RecurrenceType.None)
+                   .HasDefaultValue(RecurrenceType.Weekly)
                    .IsRequired();
 
             builder.Property(t => t.CreatedAt)

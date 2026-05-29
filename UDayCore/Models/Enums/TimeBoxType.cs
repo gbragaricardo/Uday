@@ -7,8 +7,6 @@ namespace UDayCore.Models.Enums
 {
     public enum TimeBoxType
     {
-        None,
-
         [Description("Esta Semana")]
         ThisWeek,
 

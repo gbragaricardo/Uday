@@ -12,8 +12,7 @@
             FontAttributes="Bold"
             HorizontalOptions="Center"
             Text="MEUS DECKS"
-            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-            VerticalOptions="Center" />
+            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
     </Shell.TitleView>
 
     <TabBar>

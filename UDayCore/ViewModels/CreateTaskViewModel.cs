@@ -23,9 +23,9 @@ namespace UDayCore.ViewModels
         [ObservableProperty] public partial DateTime? DueDate { get; set; }
         [ObservableProperty] public partial EffortLevel SelectedEffortLevel { get; set; } = EffortLevel.Medium;
         [ObservableProperty] public partial PriorityLevel SelectedPriority { get; set; } = PriorityLevel.Medium;
-        [ObservableProperty] public partial RecurrenceType SelectedRecurrenceType { get; set; } = RecurrenceType.None;
-        [ObservableProperty] public partial TaskScheduleType SelectedScheduleType { get; set; } = TaskScheduleType.None;
-        [ObservableProperty] public partial TimeBoxType SelectedTimeBox { get; set; } = TimeBoxType.None;
+        [ObservableProperty] public partial RecurrenceType SelectedRecurrenceType { get; set; } = RecurrenceType.Weekly;
+        [ObservableProperty] public partial TaskScheduleType SelectedScheduleType { get; set; } = TaskScheduleType.SpecificDate;
+        [ObservableProperty] public partial TimeBoxType SelectedTimeBox { get; set; } = TimeBoxType.ThisWeek;
 
         public CreateTaskViewModel(TaskItemService taskItemService)
         {
