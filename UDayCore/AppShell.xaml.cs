@@ -9,6 +9,7 @@ namespace UDayCore
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(CreateTaskPage), typeof(CreateTaskPage));
+            Routing.RegisterRoute(nameof(TaskDetailPage), typeof(TaskDetailPage));
         }
     }
 }

@@ -56,6 +56,19 @@ namespace UDayCore.ViewModels
         }
 
         [RelayCommand]
+        private async Task OpenTaskDetailPageAsync(TaskItemWrapper taskItemWrapper)
+        {
+            if (taskItemWrapper == null) return;
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "Task", taskItemWrapper.Task }
+            };
+
+            await Shell.Current.GoToAsync(nameof(TaskDetailPage), parameters);
+        }
+
+        [RelayCommand]
         private async Task DeleteTaskItemAsync(TaskItemWrapper taskItemWrapper)
         {
             if (taskItemWrapper == null) return;

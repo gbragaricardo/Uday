@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="UDayCore.Views.TaskDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:UDayCore.Converters"
+    xmlns:material="clr-namespace:MauiIcons.Material;assembly=MauiIcons.Material"
+    xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
+    Title="Detalhes da Tarefa"
+    x:DataType="viewModels:TaskDetailViewModel"
+    BackgroundColor="{AppThemeBinding Light={StaticResource Gray50},
+                                      Dark={StaticResource AppBackgroundColorDark}}"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <converters:EnumToColorConverter x:Key="EnumToColorConverter" />
+        <converters:EnumTranslationConverter x:Key="EnumTranslator" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, *">
+        <!--  Header  -->
+        <Grid
+            Grid.Row="0"
+            Padding="16"
+            ColumnDefinitions="Auto, *, Auto"
+            VerticalOptions="Center">
+
+            <ImageButton
+                Grid.Column="0"
+                Command="{Binding GoBackCommand}"
+                HeightRequest="40"
+                Source="{material:Material Icon=ArrowBack,
+                                           IconColor={StaticResource Primary}}"
+                WidthRequest="40" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="Detalhes da Tarefa"
+                TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                            Dark={StaticResource Gray100}}"
+                VerticalOptions="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1" Padding="20">
+            <VerticalStackLayout Spacing="24">
+
+                <!--  Title & Status  -->
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        Text="{Binding Task.Title}"
+                        TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
+                                                    Dark={StaticResource PrimaryDarkTextDark}}" />
+
+                    <HorizontalStackLayout Spacing="8">
+                        <Border
+                            Padding="8,4"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource Gray200},
+                                                              Dark={StaticResource Gray800}}"
+                            StrokeShape="RoundRectangle 4"
+                            StrokeThickness="0">
+                            <Label
+                                FontSize="12"
+                                Text="{Binding Task.IsCompleted, Converter={StaticResource EnumTranslator}, ConverterParameter='Status'}"
+                                TextColor="{AppThemeBinding Light={StaticResource Gray700},
+                                                            Dark={StaticResource Gray300}}" />
+                        </Border>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <!--  Description  -->
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="Descrição"
+                        TextColor="{StaticResource TextColor}" />
+
+                    <Border
+                        Padding="16"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                          Dark={StaticResource CardBackgroundColorDark}}"
+                        Stroke="{AppThemeBinding Light={StaticResource Gray200},
+                                                 Dark={StaticResource Gray800}}"
+                        StrokeShape="RoundRectangle 12">
+                        <Label
+                            FontSize="15"
+                            Text="{Binding Task.Description}"
+                            TextColor="{AppThemeBinding Light={StaticResource Gray700},
+                                                        Dark={StaticResource Gray300}}">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Task.Description}"
+                                    TargetType="Label"
+                                    Value="">
+                                    <Setter Property="Text" Value="Sem descrição disponível." />
+                                    <Setter Property="FontAttributes" Value="Italic" />
+                                    <Setter Property="Opacity" Value="0.6" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!--  Information Grid  -->
+                <Grid
+                    ColumnDefinitions="*, *"
+                    ColumnSpacing="16"
+                    RowDefinitions="Auto, Auto"
+                    RowSpacing="16">
+
+                    <!--  Time/Deadline  -->
+                    <VerticalStackLayout
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="Prazo / Horário"
+                            TextColor="{StaticResource TextColor}" />
+                        <Border
+                            Padding="12"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                              Dark={StaticResource CardBackgroundColorDark}}"
+                            Stroke="{AppThemeBinding Light={StaticResource Gray200},
+                                                     Dark={StaticResource Gray800}}"
+                            StrokeShape="RoundRectangle 10">
+                            <HorizontalStackLayout Spacing="8">
+                                <Image HeightRequest="16" Source="{material:Material Icon=Schedule, IconColor={StaticResource Primary}}" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding WrappedTask.DisplayTime}"
+                                    TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                                Dark={StaticResource Gray100}}" />
+                            </HorizontalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!--  Duration  -->
+                    <VerticalStackLayout
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="Duração Estimada"
+                            TextColor="{StaticResource TextColor}" />
+                        <Border
+                            Padding="12"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                              Dark={StaticResource CardBackgroundColorDark}}"
+                            Stroke="{AppThemeBinding Light={StaticResource Gray200},
+                                                     Dark={StaticResource Gray800}}"
+                            StrokeShape="RoundRectangle 10">
+                            <HorizontalStackLayout Spacing="8">
+                                <Image HeightRequest="16" Source="{material:Material Icon=Timer, IconColor={StaticResource Primary}}" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Task.EstimatedDurationMinutes, StringFormat='{0} min'}"
+                                    TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                                Dark={StaticResource Gray100}}" />
+                            </HorizontalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!--  Priority  -->
+                    <VerticalStackLayout
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="Prioridade"
+                            TextColor="{StaticResource TextColor}" />
+                        <Border
+                            Padding="12"
+                            BackgroundColor="{Binding Task.Priority, Converter={StaticResource EnumToColorConverter}, ConverterParameter='Bg'}"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="0">
+                            <HorizontalStackLayout Spacing="8">
+                                <Image HeightRequest="16" Source="{material:Material Icon=Flag, IconColor={Binding Task.Priority, Converter={StaticResource EnumToColorConverter}, ConverterParameter='Text'}}" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="14"
+                                    Text="{Binding Task.Priority, Converter={StaticResource EnumTranslator}}"
+                                    TextColor="{Binding Task.Priority, Converter={StaticResource EnumToColorConverter}, ConverterParameter='Text'}" />
+                            </HorizontalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!--  Effort  -->
+                    <VerticalStackLayout
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="Esforço"
+                            TextColor="{StaticResource TextColor}" />
+                        <Border
+                            Padding="12"
+                            BackgroundColor="{Binding Task.EffortLevel, Converter={StaticResource EnumToColorConverter}, ConverterParameter='Bg'}"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="0">
+                            <HorizontalStackLayout Spacing="8">
+                                <Image HeightRequest="16" Source="{material:Material Icon=BarChart, IconColor={Binding Task.EffortLevel, Converter={StaticResource EnumToColorConverter}, ConverterParameter='Text'}}" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="14"
+                                    Text="{Binding Task.EffortLevel, Converter={StaticResource EnumTranslator}}"
+                                    TextColor="{Binding Task.EffortLevel, Converter={StaticResource EnumToColorConverter}, ConverterParameter='Text'}" />
+                            </HorizontalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!--  Additional Info  -->
+                <Border
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
+                                                      Dark={StaticResource CardBackgroundColorDark}}"
+                    Stroke="{AppThemeBinding Light={StaticResource Gray200},
+                                             Dark={StaticResource Gray800}}"
+                    StrokeShape="RoundRectangle 12">
+                    <VerticalStackLayout Spacing="12">
+                        <HorizontalStackLayout Spacing="12">
+                            <Image HeightRequest="18" Source="{material:Material Icon=Event, IconColor={StaticResource Primary}}" />
+                            <Label VerticalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Criada em: " TextColor="{StaticResource TextColor}" />
+                                        <Span
+                                            FontAttributes="Bold"
+                                            Text="{Binding Task.CreatedAt, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
+                                            TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                                        Dark={StaticResource Gray100}}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout IsVisible="{Binding Task.RecurrenceType, Converter={StaticResource EnumTranslator}, ConverterParameter='IsRecurring'}" Spacing="12">
+                            <Image HeightRequest="18" Source="{material:Material Icon=Repeat, IconColor={StaticResource Primary}}" />
+                            <Label VerticalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Recorrência: " TextColor="{StaticResource TextColor}" />
+                                        <Span
+                                            FontAttributes="Bold"
+                                            Text="{Binding Task.RecurrenceType, Converter={StaticResource EnumTranslator}}"
+                                            TextColor="{AppThemeBinding Light={StaticResource Gray900},
+                                                                        Dark={StaticResource Gray100}}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

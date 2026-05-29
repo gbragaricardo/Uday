@@ -225,7 +225,7 @@
                                     <Grid
                                         x:Name="TaskFrontBody"
                                         Padding="0,16"
-                                        ColumnDefinitions="64, *"
+                                        ColumnDefinitions="64, *, 48"
                                         ColumnSpacing="8"
                                         IsVisible="{Binding IsAwaitingFeedback, Converter={StaticResource InvertedBoolConverter}}">
                                         <CheckBox
@@ -354,6 +354,16 @@
 
                                             </VerticalStackLayout>
                                         </Grid>
+
+                                        <ImageButton
+                                            Grid.Column="2"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:HomeViewModel}}, Path=OpenTaskDetailPageCommand}"
+                                            CommandParameter="{Binding .}"
+                                            HeightRequest="8"
+                                            HorizontalOptions="Center"
+                                            Source="{material:Material Icon=Info,
+                                                                       IconColor={StaticResource Primary}}"
+                                            VerticalOptions="Start" />
                                     </Grid>
 
                                     <Border

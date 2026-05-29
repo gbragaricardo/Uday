@@ -29,6 +29,9 @@ namespace UDayCore
             builder.Services.AddTransient<CreateTaskViewModel>();
             builder.Services.AddTransient<CreateTaskPage>();
 
+            builder.Services.AddTransient<TaskDetailViewModel>();
+            builder.Services.AddTransient<TaskDetailPage>();
+
             #region IFs FEIOS
 #if DEBUG
             builder.Logging.AddDebug();
