@@ -82,20 +82,23 @@
                     FontAttributes="Bold"
                     FontSize="28"
                     Text="{Binding UserName, StringFormat='Olá, {0}'}"
-                    TextColor="{StaticResource TextColor}" />
+                    TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
 
-                <Label FontSize="16" Text="Sua atividade hoje" />
+                <Label 
+                    FontSize="16" 
+                    Text="Sua atividade hoje" 
+                    TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
             </VerticalStackLayout>
 
             <Border
                 Grid.Row="1"
                 Padding="16"
-                BackgroundColor="{StaticResource CardBackgroundColor}"
+                BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
                 StrokeShape="RoundRectangle 8"
                 StrokeThickness="1">
                 <Border.Shadow>
                     <Shadow
-                        Brush="Black"
+                        Brush="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Black}}"
                         Opacity="0.1"
                         Radius="10"
                         Offset="0, 5" />
@@ -107,14 +110,25 @@
                             FontAttributes="Bold"
                             FontSize="24"
                             Text="Progresso diário"
+                            TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"
                             VerticalOptions="Center" />
 
-                        <Border Padding="8" StrokeShape="RoundRectangle 4">
-                            <Label Text="{Binding ProgressPercentage, StringFormat='{0}%'}" VerticalOptions="Center" />
+                        <Border 
+                            Padding="8" 
+                            StrokeShape="RoundRectangle 4"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource Gray800}}"
+                            Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray700}}">
+                            <Label 
+                                Text="{Binding ProgressPercentage, StringFormat='{0}%'}" 
+                                TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"
+                                VerticalOptions="Center" />
                         </Border>
                     </FlexLayout>
 
-                    <Label Grid.Row="1" Text="{Binding ProgressText}" />
+                    <Label 
+                        Grid.Row="1" 
+                        Text="{Binding ProgressText}"
+                        TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
 
                     <ProgressBar
                         Grid.Row="2"
@@ -143,7 +157,7 @@
                             <BoxView
                                 Margin="0,4,0,0"
                                 HeightRequest="1"
-                                Color="#E5E7EB" />
+                                Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}" />
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.GroupHeaderTemplate>
@@ -154,16 +168,16 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewModelItems:TaskItemWrapper">
-                        <SwipeView BackgroundColor="{StaticResource CardBackgroundColor}">
+                        <SwipeView BackgroundColor="{AppThemeBinding Light={StaticResource AppBackgroundColor}, Dark={StaticResource AppBackgroundColorDark}}">
 
                             <SwipeView.RightItems>
                                 <SwipeItems Mode="Reveal">
                                     <SwipeItemView Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:HomeViewModel}}, Path=DeleteTaskItemCommand}" CommandParameter="{Binding .}">
 
                                         <Border
-                                            BackgroundColor="#FF3B30"
+                                            BackgroundColor="{StaticResource Danger}"
                                             MinimumHeightRequest="80"
-                                            Stroke="{StaticResource CardBackgroundColor}"
+                                            Stroke="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
                                             StrokeShape="RoundRectangle 0, 8, 8, 0"
                                             StrokeThickness="1"
                                             WidthRequest="80">
@@ -181,7 +195,7 @@
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <Border
-                                BackgroundColor="{StaticResource CardBackgroundColor}"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
                                 MinimumHeightRequest="80"
                                 Opacity="1"
                                 StrokeShape="RoundRectangle 8">
@@ -222,7 +236,7 @@
                                                 FontAttributes="Bold"
                                                 FontSize="18"
                                                 Text="{Binding Task.Title}"
-                                                TextColor="{StaticResource PrimaryDarkText}"
+                                                TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource PrimaryDarkTextDark}}"
                                                 TextDecorations="None">
                                                 <Label.Triggers>
 
@@ -232,7 +246,7 @@
                                                         Value="True">
 
                                                         <Setter Property="TextDecorations" Value="Strikethrough" />
-                                                        <Setter Property="TextColor" Value="Gray" />
+                                                        <Setter Property="TextColor" Value="{StaticResource Gray400}" />
                                                     </DataTrigger>
                                                 </Label.Triggers>
                                             </Label>
@@ -242,23 +256,23 @@
                                                 <HorizontalStackLayout>
                                                     <Border
                                                         Padding="8"
-                                                        BackgroundColor="#F3F4F6"
+                                                        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}"
                                                         StrokeShape="RoundRectangle 6"
                                                         StrokeThickness="0">
                                                         <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
-                                                            <Image HeightRequest="14" Source="{material:Material Icon=Schedule, IconColor=#4B5563}" />
+                                                            <Image HeightRequest="14" Source="{material:Material Icon=Schedule, IconColor={AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}}" />
                                                             <Label VerticalOptions="Center">
                                                                 <Label.FormattedText>
                                                                     <FormattedString>
                                                                         <Span
                                                                             FontSize="12"
                                                                             Text="Prazo: "
-                                                                            TextColor="#4B5563" />
+                                                                            TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
                                                                         <Span
                                                                             FontAttributes="Bold"
                                                                             FontSize="12"
                                                                             Text="{Binding DisplayTime}"
-                                                                            TextColor="#111827" />
+                                                                            TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
                                                                     </FormattedString>
                                                                 </Label.FormattedText>
                                                             </Label>
@@ -276,7 +290,7 @@
                                                         StrokeThickness="0">
 
                                                         <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
-                                                            <Image HeightRequest="14" Source="{material:Material Icon=Flag, IconColor=#EF4444}" />
+                                                            <Image HeightRequest="14" Source="{material:Material Icon=Flag, IconColor={Binding Task.Priority, Converter={StaticResource EnumToColorConverter}, ConverterParameter='Text'}}" />
                                                             <Label VerticalOptions="Center">
                                                                 <Label.FormattedText>
                                                                     <FormattedString>
@@ -329,7 +343,7 @@
                                     <Border
                                         x:Name="TaskBackBody"
                                         Padding="16,8,16,16"
-                                        BackgroundColor="{StaticResource CardBackgroundColor}"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
                                         IsVisible="{Binding IsAwaitingFeedback}"
                                         StrokeShape="RoundRectangle 8">
 
@@ -348,6 +362,7 @@
                                                     FontAttributes="Bold"
                                                     FontSize="16"
                                                     Text="Selecione o esforço exigido"
+                                                    TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"
                                                     VerticalTextAlignment="Center" />
                                             </HorizontalStackLayout>
 

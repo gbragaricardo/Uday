@@ -12,7 +12,7 @@
             FontAttributes="Bold"
             HorizontalOptions="Center"
             Text="MEUS DECKS"
-            TextColor="White"
+            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
             VerticalOptions="Center" />
     </Shell.TitleView>
 

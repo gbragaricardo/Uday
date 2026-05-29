@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModels="clr-namespace:UDayCore.ViewModels"
     xmlns:converters="clr-namespace:UDayCore.Converters"
-    BackgroundColor="#F9FAFB"
+    BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource AppBackgroundColorDark}}"
     Shell.NavBarIsVisible="False">
     <ContentPage.BindingContext>
         <viewModels:OnboardingViewModel />
@@ -23,17 +23,17 @@
                     FontAttributes="Bold"
                     FontSize="28"
                     Text="Bem-vindo ao UDay"
-                    TextColor="#111827" />
+                    TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
                 <Label
                     FontSize="16"
                     Text="Vamos personalizar o seu ambiente para máxima produtividade."
-                    TextColor="#6B7280" />
+                    TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
             </VerticalStackLayout>
 
             <Border
                 Padding="16"
-                BackgroundColor="White"
-                Stroke="#E5E7EB"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardBackgroundColorDark}}"
+                Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}"
                 StrokeShape="RoundRectangle 12"
                 StrokeThickness="1">
 
@@ -43,14 +43,14 @@
                             FontAttributes="Bold"
                             FontSize="16"
                             Text="Como podemos te chamar?"
-                            TextColor="#374151" />
+                            TextColor="{AppThemeBinding Light={StaticResource Gray700}, Dark={StaticResource Gray300}}" />
 
                         <Border Padding="16,0" StrokeShape="RoundRectangle 8">
                             <Entry
-                                BackgroundColor="#F3F4F6"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}"
                                 Placeholder="Ex: Pingo Fogo"
                                 Text="{Binding UserName}"
-                                TextColor="#111827" />
+                                TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
                         </Border>
                     </VerticalStackLayout>
 
@@ -59,16 +59,16 @@
                             FontAttributes="Bold"
                             FontSize="16"
                             Text="Seu turno mais produtivo:"
-                            TextColor="#374151" />
+                            TextColor="{AppThemeBinding Light={StaticResource Gray700}, Dark={StaticResource Gray300}}" />
 
                         <Border Padding="16,0" StrokeShape="RoundRectangle 8">
                             <Picker
                                 Title="Selecione o turno"
-                                BackgroundColor="#F3F4F6"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}"
                                 ItemsSource="{Binding Periods}"
                                 SelectedItem="{Binding SelectedPeriod}"
                                 ItemDisplayBinding="{Binding ., Converter={StaticResource EnumTranslator}}"
-                                TextColor="#111827" />
+                                TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
                         </Border>
                     </VerticalStackLayout>
                 </VerticalStackLayout>
@@ -76,8 +76,8 @@
 
             <Border
                 Padding="16"
-                BackgroundColor="White"
-                Stroke="#E5E7EB"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardBackgroundColorDark}}"
+                Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}"
                 StrokeShape="RoundRectangle 12"
                 StrokeThickness="1">
                 <VerticalStackLayout>
@@ -86,15 +86,15 @@
                         <Label
                             FontAttributes="Bold"
                             Text="Ordenar tarefas primeiro por:"
-                            TextColor="#374151" />
+                            TextColor="{AppThemeBinding Light={StaticResource Gray700}, Dark={StaticResource Gray300}}" />
                         <Border Padding="16,0" StrokeShape="RoundRectangle 8">
 
                             <Picker
-                                BackgroundColor="#F3F4F6"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}"
                                 ItemsSource="{Binding SortOptions}"
                                 SelectedItem="{Binding SelectedSort}"
                                 ItemDisplayBinding="{Binding ., Converter={StaticResource EnumTranslator}}"
-                                TextColor="#111827" />
+                                TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
                         </Border>
                     </VerticalStackLayout>
 
@@ -105,7 +105,7 @@
                         <Label
                             FontAttributes="Bold"
                             Text="Tarefas aos finais de semana?"
-                            TextColor="#374151"
+                            TextColor="{AppThemeBinding Light={StaticResource Gray700}, Dark={StaticResource Gray300}}"
                             VerticalOptions="Center" />
                         
                         <Switch IsToggled="{Binding ManageWeekends}" OnColor="{StaticResource Primary}" />
@@ -115,8 +115,8 @@
 
             <Border
                 Padding="16"
-                BackgroundColor="White"
-                Stroke="#E5E7EB"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardBackgroundColorDark}}"
+                Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}"
                 StrokeShape="RoundRectangle 12"
                 StrokeThickness="1">
 
@@ -125,15 +125,15 @@
                         Margin="0,8,0,0"
                         FontAttributes="Bold"
                         Text="Tema Visual:"
-                        TextColor="#374151" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray700}, Dark={StaticResource Gray300}}" />
                     
                     <Border Padding="16,0" StrokeShape="RoundRectangle 8">
                         <Picker
-                            BackgroundColor="#F3F4F6"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray800}}"
                             ItemsSource="{Binding Themes}"
                             SelectedItem="{Binding SelectedTheme}"
                             ItemDisplayBinding="{Binding ., Converter={StaticResource EnumTranslator}}"
-                            TextColor="#111827" />
+                            TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
                     </Border>
                 </VerticalStackLayout>
             </Border>
@@ -147,7 +147,7 @@
                 FontSize="16"
                 HeightRequest="54"
                 Text="Tudo Pronto! Começar"
-                TextColor="White" />
+                TextColor="{StaticResource White}" />
 
         </VerticalStackLayout>
     </ScrollView>
