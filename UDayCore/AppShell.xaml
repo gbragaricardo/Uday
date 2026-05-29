@@ -7,28 +7,13 @@
     xmlns:views="clr-namespace:UDayCore.Views"
     Title="UDayCore">
 
-    <Shell.TitleView>
-        <Label
-            FontAttributes="Bold"
-            HorizontalOptions="Center"
-            Text="MEUS DECKS"
-            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-    </Shell.TitleView>
-
     <TabBar>
-        <Tab Title="Home">
+        <Tab
+            Title="Home">
             <ShellContent
                 Title="Home"
                 ContentTemplate="{DataTemplate views:HomePage}"
                 Route="HomePage" />
-        </Tab>
-
-        <Tab
-            Title="Tasks">
-            <ShellContent
-                Title="Tasks"
-                ContentTemplate="{DataTemplate views:TasksPage}"
-                Route="TasksPage" />
         </Tab>
     </TabBar>
 
