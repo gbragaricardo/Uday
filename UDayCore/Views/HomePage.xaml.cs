@@ -30,6 +30,9 @@ public partial class HomePage : ContentPage
         {
             if (e.Value)
             {
+                // Se a tarefa já está completa (veio do banco assim), não mostramos o feedback
+                if (wrapper.IsCompleted) return;
+
                 if (cb.Parent?.Parent is VisualElement cardContainer)
                 {
                     await Task.WhenAll(
