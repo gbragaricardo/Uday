@@ -7,6 +7,8 @@ namespace UDayCore.Models.Enums
 {
     public enum RecurrenceType
     {
+        None, 
+
         [Description("Diário")]
         Daily,
 

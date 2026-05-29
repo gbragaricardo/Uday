@@ -23,7 +23,7 @@ namespace UDayCore.ViewModels
         [ObservableProperty] public partial DateTime? DueDate { get; set; }
         [ObservableProperty] public partial EffortLevel SelectedEffortLevel { get; set; } = EffortLevel.Medium;
         [ObservableProperty] public partial PriorityLevel SelectedPriority { get; set; } = PriorityLevel.Medium;
-        [ObservableProperty] public partial RecurrenceType SelectedRecurrenceType { get; set; } = RecurrenceType.Weekly;
+        [ObservableProperty] public partial RecurrenceType SelectedRecurrenceType { get; set; } = RecurrenceType.None;
         [ObservableProperty] public partial TaskScheduleType SelectedScheduleType { get; set; } = TaskScheduleType.SpecificDate;
         [ObservableProperty] public partial TimeBoxType SelectedTimeBox { get; set; } = TimeBoxType.ThisWeek;
 
@@ -48,17 +48,47 @@ namespace UDayCore.ViewModels
         [RelayCommand]
         private async Task CreateTaskItemAsync()
         {
+            DateTime? availableFrom = AvailableFrom;
+            DateTime? dueDate = DueDate;
+
+            if (SelectedScheduleType == TaskScheduleType.TimeBox)
+            {
+                var today = DateTime.Today;
+                switch (SelectedTimeBox)
+                {
+                    case TimeBoxType.ThisWeek:
+                        // Início da semana atual (assumindo Segunda como primeiro dia)
+                        int diff = (7 + (today.DayOfWeek - DayOfWeek.Monday)) % 7;
+                        availableFrom = today.AddDays(-1 * diff);
+                        dueDate = availableFrom.Value.AddDays(6);
+                        break;
+                    case TimeBoxType.NextWeek:
+                        int nextDiff = (7 + (today.DayOfWeek - DayOfWeek.Monday)) % 7;
+                        availableFrom = today.AddDays(-1 * nextDiff + 7);
+                        dueDate = availableFrom.Value.AddDays(6);
+                        break;
+                    case TimeBoxType.ThisMonth:
+                        availableFrom = new DateTime(today.Year, today.Month, 1);
+                        dueDate = availableFrom.Value.AddMonths(1).AddDays(-1);
+                        break;
+                    case TimeBoxType.NextMonth:
+                        availableFrom = new DateTime(today.Year, today.Month, 1).AddMonths(1);
+                        dueDate = availableFrom.Value.AddMonths(1).AddDays(-1);
+                        break;
+                }
+            }
+
             TaskItem newTask = new TaskItem
             {
                 Title = this.Title,
                 Description = this.Description ?? string.Empty,
                 EstimatedDurationMinutes = this.EstimatedDurationMinutes,
                 ScheduleType = SelectedScheduleType,
-                AvailableFrom = this.AvailableFrom ?? null,
-                DueDate = this.DueDate ?? null,
+                AvailableFrom = availableFrom,
+                DueDate = dueDate,
                 Priority = SelectedPriority,
-                EffortLevel = SelectedEffortLevel
-
+                EffortLevel = SelectedEffortLevel,
+                RecurrenceType = SelectedScheduleType == TaskScheduleType.Recurring ? SelectedRecurrenceType : RecurrenceType.None
             };
 
             await _taskItemService.SaveTaskItemAsync(newTask);

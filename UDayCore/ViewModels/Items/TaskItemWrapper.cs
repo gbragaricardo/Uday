@@ -20,29 +20,43 @@ namespace UDayCore.ViewModels.Items
         {
             get
             {
-                // Aqui você avalia qual é a regra de tempo que a tarefa possui
                 switch (Task.ScheduleType)
                 {
                     case TaskScheduleType.TimeFrame:
-                        // Exemplo: "14:00 - 15:30"
-                        return $"{Task.AvailableFrom:hh\\:mm} - {Task.DueDate:hh\\:mm}";
-
                     case TaskScheduleType.TimeBox:
-                        // Exemplo: "14:00 - 15:30"
-                        return $"{Task.AvailableFrom:hh\\:mm} - {Task.DueDate:hh\\:mm}";
+                        // Exibe o intervalo de dias: "12/05 - 18/05"
+                        if (Task.AvailableFrom.HasValue && Task.DueDate.HasValue)
+                            return $"{Task.AvailableFrom:dd/MM} - {Task.DueDate:dd/MM}";
+                        
+                        return "Período indefinido";
 
                     case TaskScheduleType.SpecificDate:
-                        if (Task.DueDate == DateTime.Today)
+                        if (!Task.DueDate.HasValue) return "Data indefinida";
+
+                        var date = Task.DueDate.Value.Date;
+                        var today = DateTime.Today;
+
+                        if (date == today)
                             return "Hoje";
+                        
+                        if (date == today.AddDays(1))
+                            return "Amanhã";
 
-                        //if (Task.DueDate.Date == DateTime.Today.AddDays(1))
-                        //    return "Amanhã";
+                        // Para outras datas, mostra dd/MM
+                        return $"{Task.DueDate:dd/MM}";
 
-                        // Exemplo: "15 de Mai"
-                        return $"{Task.DueDate:hh\\:mm}";
+                    case TaskScheduleType.Recurring:
+                        return Task.RecurrenceType switch
+                        {
+                            RecurrenceType.Daily => "Diariamente",
+                            RecurrenceType.Weekly => "Semanalmente",
+                            RecurrenceType.Monthly => "Mensalmente",
+                            RecurrenceType.Yearly => "Anualmente",
+                            _ => "Recorrente"
+                        };
 
                     default:
-                        return "Sem prazo";
+                        return "Qualquer momento";
                 }
             }
         }

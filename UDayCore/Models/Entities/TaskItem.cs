@@ -13,12 +13,11 @@ namespace UDayCore.Models.Entities
         public string Description { get; set; } = string.Empty;
         public int EstimatedDurationMinutes { get; set; } = 15;
         public TaskScheduleType ScheduleType { get; set; }
-
         public DateTime? AvailableFrom { get; set; }
         public DateTime? DueDate { get; set; }
         public EffortLevel EffortLevel { get; set; } = EffortLevel.Medium;
         public PriorityLevel Priority { get; set; } = PriorityLevel.Medium;
-        public RecurrenceType RecurrenceType { get; set; } = RecurrenceType.Weekly;
+        public RecurrenceType RecurrenceType { get; set; } = RecurrenceType.None;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public bool IsCompleted { get; set; } = false;
     }
