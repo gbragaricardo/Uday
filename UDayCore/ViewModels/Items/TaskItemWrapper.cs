@@ -50,6 +50,8 @@ namespace UDayCore.ViewModels.Items
         public TaskItemWrapper(TaskItem task)
         {
             Task = task;
+            IsCompleted = task.IsCompleted;
+            IsCheckBoxChecked = task.IsCompleted;
 
             switch (task.EffortLevel)
             {
@@ -59,6 +61,11 @@ namespace UDayCore.ViewModels.Items
 
                 case EffortLevel.Heavy: DayPeriod = DayPeriod.Evening; break;
             }
+        }
+
+        partial void OnIsCompletedChanged(bool value)
+        {
+            Task.IsCompleted = value;
         }
     }
 }

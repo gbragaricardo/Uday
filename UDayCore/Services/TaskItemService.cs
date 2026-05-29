@@ -22,6 +22,14 @@ namespace UDayCore.Services
             
             return taskItems;
         }
+        public async Task UpdateTaskItemAsync(TaskItem taskItem)
+        {
+            using var db = new UDayDbContext();
+            
+            db.TaskItems.Update(taskItem);
+            await db.SaveChangesAsync();
+        }
+
         public async Task DeleteTaskItemAsync(TaskItem taskItem)
         {
             using var db = new UDayDbContext();

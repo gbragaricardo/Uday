@@ -1,4 +1,5 @@
 using UDayCore.Models.Entities;
+using UDayCore.Models.Enums;
 using UDayCore.ViewModels;
 using UDayCore.ViewModels.Items;
 
@@ -88,7 +89,7 @@ public partial class HomePage : ContentPage
 
     private async void OnEffortSelected(object sender, EventArgs e)
     {
-        if (sender is Button btn && btn.BindingContext is TaskItemWrapper wrapper)
+        if (sender is Button btn && btn.BindingContext is TaskItemWrapper wrapper && btn.CommandParameter is EffortLevel effort)
         {
             if (btn.Parent?.Parent?.Parent is VisualElement cardContainer)
             {
@@ -97,6 +98,7 @@ public partial class HomePage : ContentPage
                     cardContainer.ScaleToAsync(0.95, 150)
                 );
 
+                wrapper.Task.EffortLevel = effort;
                 wrapper.IsAwaitingFeedback = false;
                 wrapper.IsCompleted = true;
 
@@ -111,6 +113,7 @@ public partial class HomePage : ContentPage
             }
             else
             {
+                wrapper.Task.EffortLevel = effort;
                 wrapper.IsAwaitingFeedback = false;
             }
         }

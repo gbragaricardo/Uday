@@ -104,7 +104,7 @@ namespace UDayCore.ViewModels
 
         public async Task RefreshTaskStateAsync(TaskItemWrapper wrapper)
         {
-            // await _taskService.UpdateTaskItemAsync(wrapper.Task);
+            await _taskItemService.UpdateTaskItemAsync(wrapper.Task);
             UpdateProgress();
         }
     }
