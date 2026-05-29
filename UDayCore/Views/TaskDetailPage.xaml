@@ -15,6 +15,7 @@
     <ContentPage.Resources>
         <converters:EnumToColorConverter x:Key="EnumToColorConverter" />
         <converters:EnumTranslationConverter x:Key="EnumTranslator" />
+        <converters:DurationToTextConverter x:Key="DurationConverter" />
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto, *">
@@ -162,7 +163,7 @@
                                 <Image HeightRequest="16" Source="{material:Material Icon=Timer, IconColor={StaticResource Primary}}" />
                                 <Label
                                     FontSize="14"
-                                    Text="{Binding Task.EstimatedDurationMinutes, StringFormat='{0} min'}"
+                                    Text="{Binding Task.EstimatedDurationMinutes, Converter={StaticResource DurationConverter}}"
                                     TextColor="{AppThemeBinding Light={StaticResource Gray900},
                                                                 Dark={StaticResource Gray100}}" />
                             </HorizontalStackLayout>

@@ -12,6 +12,7 @@
 
     <ContentPage.Resources>
         <converters:EnumTranslationConverter x:Key="EnumTranslator" />
+        <converters:DurationToTextConverter x:Key="DurationConverter" />
     </ContentPage.Resources>
 
     <ScrollView Padding="16">
@@ -26,15 +27,12 @@
                     <Label
                         FontAttributes="Bold"
                         Text="Título"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
-                                                    Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
 
                     <Border
                         Padding="4"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
-                                                          Dark={StaticResource CardBackgroundColorDark}}"
-                        Stroke="{AppThemeBinding Light={StaticResource Gray200},
-                                                 Dark={StaticResource Gray800}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
+                        Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="1">
 
@@ -42,11 +40,9 @@
                             BackgroundColor="Transparent"
                             MaxLength="60"
                             Placeholder="Título"
-                            PlaceholderColor="{AppThemeBinding Light={StaticResource LightTextColor},
-                                                               Dark={StaticResource LightTextColorDark}}"
+                            PlaceholderColor="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource LightTextColorDark}}"
                             Text="{Binding Title, Mode=TwoWay}"
-                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
-                                                        Dark={StaticResource PrimaryDarkTextDark}}" />
+                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource PrimaryDarkTextDark}}" />
                     </Border>
                 </VerticalStackLayout>
 
@@ -55,15 +51,12 @@
                     <Label
                         FontAttributes="Bold"
                         Text="Descrição"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
-                                                    Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
 
                     <Border
                         Padding="4"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
-                                                          Dark={StaticResource CardBackgroundColorDark}}"
-                        Stroke="{AppThemeBinding Light={StaticResource Gray200},
-                                                 Dark={StaticResource Gray800}}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
+                        Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}"
                         StrokeShape="RoundRectangle 10"
                         StrokeThickness="1">
 
@@ -72,11 +65,9 @@
                             BackgroundColor="Transparent"
                             MaxLength="450"
                             Placeholder="Descrição (opcional)"
-                            PlaceholderColor="{AppThemeBinding Light={StaticResource LightTextColor},
-                                                               Dark={StaticResource LightTextColorDark}}"
+                            PlaceholderColor="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource LightTextColorDark}}"
                             Text="{Binding Description, Mode=TwoWay}"
-                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
-                                                        Dark={StaticResource PrimaryDarkTextDark}}" />
+                            TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource PrimaryDarkTextDark}}" />
                     </Border>
                 </VerticalStackLayout>
 
@@ -85,27 +76,23 @@
                     <Label
                         FontAttributes="Bold"
                         Text="Duração estimada:"
-                        TextColor="{AppThemeBinding Light={StaticResource Gray900},
-                                                    Dark={StaticResource Gray100}}" />
+                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
 
                     <HorizontalStackLayout Spacing="16">
 
                         <Border
                             Padding="24,0"
-                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor},
-                                                              Dark={StaticResource CardBackgroundColorDark}}"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource CardBackgroundColor}, Dark={StaticResource CardBackgroundColorDark}}"
                             MinimumWidthRequest="156"
-                            Stroke="{AppThemeBinding Light={StaticResource LightTextColor},
-                                                     Dark={StaticResource LightTextColorDark}}"
+                            Stroke="{AppThemeBinding Light={StaticResource LightTextColor}, Dark={StaticResource LightTextColorDark}}"
                             StrokeShape="RoundRectangle 10"
                             StrokeThickness="1">
 
                             <Label
                                 FontSize="14"
                                 HorizontalOptions="Center"
-                                Text="{Binding EstimatedDurationMinutes, StringFormat='{0} minutos'}"
-                                TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
-                                                            Dark={StaticResource PrimaryDarkTextDark}}"
+                                Text="{Binding EstimatedDurationMinutes, Converter={StaticResource DurationConverter}}"
+                                TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource PrimaryDarkTextDark}}"
                                 VerticalOptions="Center" />
                         </Border>
 
